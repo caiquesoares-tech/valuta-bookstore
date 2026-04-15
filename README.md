@@ -14,6 +14,6 @@ Este é um projeto de um simulador de livraria online desenvolvido para consolid
 
 ## Como visualizar o projeto
 Você pode acessar o site ao vivo através do link abaixo:
-(LINK EM BREVE)
+(https://caiquesoares-tech.github.io/valuta-bookstore/)
 ---
 Desenvolvido por Caique Soares - Estudante de ADS.
