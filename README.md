@@ -1,5 +1,3 @@
-# valuta-bookstore
-Simulador de bookstore desenvolvido para praticar conceitos de HTML5, CSS3 e lógica de programação. Parte do meu portfólio de estudos em Análise e Desenvolvimento de Sistemas.
 # Valuta - Bookstore Simulator
 
 Este é um projeto de um simulador de livraria online desenvolvido para consolidar conhecimentos em **Desenvolvimento Web** e **Lógica de Programação**. O foco principal foi a criação de uma interface limpa, funcional e a prática de versionamento com Git.
