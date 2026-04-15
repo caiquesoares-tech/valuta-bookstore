@@ -1,6 +1,6 @@
 # Valuta - Bookstore Simulator
 
-Este é um projeto de um simulador de livraria online desenvolvido para consolidar conhecimentos em **Desenvolvimento Web** e **Lógica de Programação**. O foco principal foi a criação de uma interface limpa, funcional e a prática de versionamento com Git.
+Este é um projeto de um simulador de livraria online desenvolvido para consolidar conhecimentos em **Desenvolvimento Web** e **Lógica de Programação**. O foco principal foi a criação de uma interface limpa, funcional e a prática de versionamento com Git. Estou implementandfo cada vez mais recursos e automatizaç~es para demonstrar o meu trabalho, em breve, o site tera barra de pesquisas, e mais outras interações com o usúario. em desenvolvimento... veja a versão disponivel do meu projeto ptincipal e inicial agora ao final dessa pagina.
 
 ## Tecnologias Utilizadas
 * **HTML5:** Estruturação semântica do conteúdo.
