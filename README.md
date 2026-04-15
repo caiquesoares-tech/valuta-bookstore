@@ -11,6 +11,8 @@ Este é um projeto de um simulador de livraria online desenvolvido para consolid
 * Aplicar conceitos de **Análise e Desenvolvimento de Sistemas**.
 * Praticar a organização de diretórios e caminhos de arquivos.
 * Simular o fluxo de navegação de um e-commerce.
+* implementar sistemas de automatização de pesquisas
+* entregar uma boa experiência de navegação ao usuario, minimalista e organizada.
 
 ## Como visualizar o projeto
 Você pode acessar o site ao vivo através do link abaixo:
