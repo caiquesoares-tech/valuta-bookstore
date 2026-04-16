@@ -15,7 +15,7 @@ Este é um projeto de um simulador de livraria online desenvolvido para consolid
 * implementar sistemas de automatização de pesquisas.
 * entregar uma boa experiência de navegação ao usuario, minimalista e organizada.
 
-## Como visualizar o projeto
+## Como visualizar o projeto em desenvolvimento 
 Você pode acessar o site ao vivo através do link:
 https://caiquesoares-tech.github.io/valuta-bookstore/
 ---
