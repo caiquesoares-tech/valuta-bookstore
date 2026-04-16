@@ -5,13 +5,14 @@ Este é um projeto de um simulador de livraria online desenvolvido para consolid
 ## Tecnologias Utilizadas
 * **HTML5:** Estruturação semântica do conteúdo.
 * **CSS3:** Estilização responsiva e layout.
-* **Git/GitHub:** Controle de versão e hospedagem.
+* **Java Script:** Uso para funções automatizadas
+* **Git/GitHub:** upload de projetos e portifólio.
 
 ## Objetivos do Projeto
 * Aplicar conceitos de **Análise e Desenvolvimento de Sistemas**.
 * Praticar a organização de diretórios e caminhos de arquivos.
 * Simular o fluxo de navegação de um e-commerce.
-* implementar sistemas de automatização de pesquisas
+* implementar sistemas de automatização de pesquisas.
 * entregar uma boa experiência de navegação ao usuario, minimalista e organizada.
 
 ## Como visualizar o projeto
