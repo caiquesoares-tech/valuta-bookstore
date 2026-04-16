@@ -1,4 +1,6 @@
-/* RESET */
+/* ============================================================
+   1. RESET E CONFIGURAÇÕES GERAIS
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -10,9 +12,12 @@ body {
     background-color: #ffffff;
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* HEADER */
+/* ============================================================
+   2. HEADER E LOGO
+   ============================================================ */
 header {
     background-color: #fff;
     padding: 40px 20px 20px;
@@ -46,7 +51,9 @@ header {
     font-weight: 700;
 }
 
-/* NAV */
+/* ============================================================
+   3. NAVEGAÇÃO E BUSCA
+   ============================================================ */
 nav {
     background-color: #fff;
     padding: 12px 0;
@@ -77,6 +84,28 @@ nav {
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.menu-principal a:hover {
+    color: #ff9f00;
+}
+
+/* Linha decorativa sob o menu no hover */
+.menu-principal a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ff9f00;
+    transition: width 0.3s ease;
+}
+
+.menu-principal a:hover::after {
+    width: 100%;
 }
 
 .search-container {
@@ -103,7 +132,9 @@ nav {
     cursor: default;
 }
 
-/* VITRINE */
+/* ============================================================
+   4. VITRINE E CARDS DE LIVROS
+   ============================================================ */
 .hero-intro {
     padding: 50px 20px 30px;
     text-align: center;
@@ -142,28 +173,73 @@ nav {
     gap: 35px;
 }
 
+/* Estilo do Card com Animação */
 .card-livro {
     width: 220px;
     padding: 15px;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.card-livro:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.capa-container {
+    overflow: hidden; /* Mantém o zoom da imagem dentro do limite */
+    margin-bottom: 15px;
 }
 
 .capa-container img {
     width: 100%;
     height: 280px;
     object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.card-livro:hover .capa-container img {
+    transform: scale(1.05);
+}
+
+.card-livro h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.autor-livro {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.preco {
+    font-weight: 700;
+    color: #1a1a1a;
     margin-bottom: 15px;
+}
+
+/* Botões */
+.card-acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .btn-detalhes {
     background-color: #ff9f00;
     color: #fff;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 18px;
     border-radius: 25px;
     font-size: 0.7rem;
     font-weight: 700;
     cursor: pointer;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .btn-add-carrinho {
@@ -174,14 +250,25 @@ nav {
     height: 38px;
     border-radius: 50%;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-/* FOOTER */
+.btn-detalhes:hover, .btn-add-carrinho:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   5. RODAPÉ (FOOTER)
+   ============================================================ */
 footer {
     background-color: #1a1a1a; 
     color: #ffffff;
-    padding: 50px 20px 30px;
-    margin-top: 60px;
+    padding: 60px 20px 30px;
+    margin-top: 80px;
     text-align: center;
 }
 
@@ -214,21 +301,33 @@ footer {
     width: 30px;
     height: 1px;
     background-color: #333;
-    margin: 0 auto 20px;
+    margin: 0 auto 25px;
 }
 
 .footer-bottom {
     font-size: 0.7rem;
     color: #555;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     line-height: 1.8;
 }
 
 .dev-credito {
     color: #777;
+    margin-top: 5px;
 }
 
 .dev-credito strong {
     color: #aaa;
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-grid {
+        gap: 30px;
+    }
 }
