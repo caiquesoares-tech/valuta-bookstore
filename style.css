@@ -1,4 +1,4 @@
-/* Reset Minimalista Estilo Apple */
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -6,170 +6,229 @@
 }
 
 body {
-    background-color: #f5f5f7; /* Cinza claro suave */
-    color: #1d1d1f; /* Tipografia clean*/
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    font-family: 'Lora', serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
 }
 
-/* Cabeçalho Limpo */
+/* HEADER */
 header {
-    padding: 80px 20px 40px;
+    background-color: #fff;
+    padding: 40px 20px 20px;
     text-align: center;
 }
 
-/* Logo: V com ênfase total */
 .logo {
-    font-size: 85px;
-    font-weight: 700; /* Fonte grossa */
-    letter-spacing: -3px;
-    color: #1d1d1f;
-    display: inline-block;
+    font-family: 'Cinzel', serif; 
+    font-size: 2.8rem;
+    color: #1a1a1a;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    letter-spacing: 2px;
 }
 
-/* Ênfase especial no V do logo */
-.logo::first-letter {
-    font-size: 1.3em; /* Deixa o V bem maior que o restante */
-    font-weight: 900; /* Mais grosso ainda */
-    color: #000000;
+.logo-destaque {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 5.5rem; 
+    font-weight: 900;
+    color: #000;
 }
 
 .subtitle {
-    font-size: 11px;
+    font-family: 'Cinzel', serif;
     text-transform: uppercase;
-    letter-spacing: 6px;
-    color: #86868b;
-    margin-top: 5px;
-    display: block;
+    letter-spacing: 8px;
+    font-size: 0.75rem;
+    color: #ff9f00; 
+    margin-top: -12px;
+    font-weight: 700;
 }
 
-/* Navegação cabeçalho transparente (Blur) */
+/* NAV */
 nav {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    background: rgba(245, 245, 247, 0.8);
-    backdrop-filter: blur(20px);
+    background-color: #fff;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #1d1d1f;
-    margin: 0 20px;
-    font-size: 14px;
-    font-weight: 400;
-    transition: opacity 0.3s;
-}
-
-.nav-links a:hover {
-    opacity: 0.5;
-}
-
-/* Container de Layout */
-.container {
-    max-width: 1000px;
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 0 20px;
 }
 
-.section-header {
+.menu-principal {
+    display: flex;
+    gap: 40px;
+}
+
+.menu-principal a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f7;
+    border-radius: 20px;
+    padding: 6px 15px;
+    border: 1px solid #eee;
+}
+
+.search-container input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.8rem;
+    width: 180px;
+}
+
+.search-icon {
+    font-size: 0.9rem;
+    color: #ff9f00;
+    margin-left: 5px;
+    cursor: default;
+}
+
+/* VITRINE */
+.hero-intro {
+    padding: 50px 20px 30px;
     text-align: center;
-    margin-bottom: 60px;
+}
+
+.frase {
+    font-size: 1.4rem;
+    font-style: italic;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 20px auto 60px;
 }
 
 .section-header h2 {
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-}
-
-/* Grid de Livros Compacto e sem Bordas */
-.livros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 45px;
-}
-
-/* Card Minimalista */
-.card-livro {
-    background: transparent;
+    font-family: 'Cinzel', serif;
     text-align: center;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    font-size: 1.2rem;
 }
 
-.card-livro:hover {
-    transform: translateY(-8px);
+.line {
+    width: 40px;
+    height: 2px;
+    background-color: #ff9f00;
+    margin: 12px auto 40px;
 }
 
-/* Container da Capa (Reduzido e Arredondado) */
-.capa-container {
-    width: 100%;
-    height: 260px; /* Caixa de visulização dos livros */
+.livros-grid {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    background-color: #ffffff; /* Fundo branco para destacar a foto */
-    border-radius: 22px; /* Cantos arredondados */
-    margin-bottom: 20px;
+    gap: 35px;
+}
+
+.card-livro {
+    width: 220px;
     padding: 15px;
-    /* Sem bordas externas */
+    text-align: center;
 }
 
 .capa-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Mantém a resolução sem esticar */
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
-/* Tipografia dos Livros */
-.card-livro h3 {
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #1d1d1f;
-}
-
-.autor {
-    font-size: 13px;
-    color: #86868b;
-    margin-bottom: 12px;
-}
-
-.preco {
-    font-size: 16px;
-    font-weight: 500;
-    color: #1d1d1f;
-}
-
-/* Botão em Laranja */
-.btn-comprar {
-    background-color: #ff9500; /* Laranja (claro e moderno) */
-    color: #ffffff;
+.btn-detalhes {
+    background-color: #ff9f00;
+    color: #fff;
     border: none;
-    padding: 10px 25px;
-    border-radius: 25px; /* Formato pílula */
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 0.7rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
 }
 
-.btn-comprar:hover {
-    background-color: #ffaa33; /* Laranja um pouco mais claro no hover */
-    transform: scale(1.05);
+.btn-add-carrinho {
+    background-color: #ff9f00;
+    color: #fff;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-/* Rodapé */
+/* FOOTER */
 footer {
+    background-color: #1a1a1a; 
+    color: #ffffff;
+    padding: 50px 20px 30px;
+    margin-top: 60px;
     text-align: center;
-    padding: 60px 20px;
-    background-color: #f5f5f7;
-    color: #86868b;
-    font-size: 12px;
-    border-top: 1px solid #d2d2d7;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-item i {
+    color: #ff9f00 !important;
+    font-size: 1.6rem;
+}
+
+.footer-item span {
+    color: #bbbbbb; 
+    font-size: 0.85rem;
+}
+
+.footer-line {
+    width: 30px;
+    height: 1px;
+    background-color: #333;
+    margin: 0 auto 20px;
+}
+
+.footer-bottom {
+    font-size: 0.7rem;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.8;
+}
+
+.dev-credito {
+    color: #777;
+}
+
+.dev-credito strong {
+    color: #aaa;
 }

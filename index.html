@@ -7,68 +7,78 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1 class="logo">Valuta</h1>
+        <h1 class="logo"><span class="logo-destaque">V</span>aluta</h1>
         <p class="subtitle">Bookstore</p>
     </header>
 
     <nav>
         <div class="nav-links">
-            <a href="#">Início</a>
-            <a href="#">Catálogo</a>
-            <a href="#">Sobre a ADS</a>
+            <div class="menu-principal">
+                <a href="#">Início</a>
+                <a href="#" id="link-carrinho">Carrinho (0)</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Pesquisar livros..." id="search-input">
+                <span class="search-icon">🔍</span>
+            </div>
         </div>
     </nav>
 
+    <section class="hero-intro">
+        <div class="hero-content">
+            <p class="frase">"O valor real do mundo é, em sua essência, o conhecimento de quem somos e das referências que temos na vida."</p>
+        </div>
+    </section>
+
     <main class="container">
         <div class="section-header">
-            <h2>Clássicos de Fiódor Dostoiévski</h2>
+            <h2>Clássicos da literatura</h2>
             <div class="line"></div>
         </div>
         
-        <section class="livros-grid">
-            <article class="card-livro">
-                <div class="capa-container">
-                    <img src="crime-e-castigo.webp" alt="Crime e Castigo">
-                </div>
-                <h3>Crime e Castigo</h3>
-                <p class="autor">Fiódor Dostoiévski</p>
-                <p class="preco">R$ 59,90</p>
-                <button class="btn-comprar">Ver Detalhes</button>
-            </article>
-
-            <article class="card-livro">
-                <div class="capa-container">
-                    <img src="os-irmaos-karamazov.jpg" alt="Os Irmãos Karamazov">
-                </div>
-                <h3>Os irmaos karamazov.jpg</h3>
-                <p class="autor">Fiódor Dostoiévski</p>
-                <p class="preco">R$ 72,00</p>
-                <button class="btn-comprar">Ver Detalhes</button>
-            </article>
-
-            <article class="card-livro">
-                <div class="capa-container">
-                    <img src="memorias-do-subsolo.jpg" alt="O Homem do Subsolo">
-                </div>
-                <h3>Memórias do Subsolo</h3>
-                <p class="autor">Fiódor Dostoiévski</p>
-                <p class="preco">R$ 45,00</p>
-                <button class="btn-comprar">Ver Detalhes</button>
-            </article>
-        </section>
+        <section id="vitrine-livros" class="livros-grid"></section>
     </main>
 
     <footer>
-        <p>Valuta Bookstore &copy; 2026</p>
-        <p>Desenvolvido por <strong>Caique Soares</strong> - ADS</p>
+        <div class="footer-container">
+            <div class="footer-grid">
+                
+                <div class="footer-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@Valutabookstoreoficial</span>
+                </div>
+                
+                <div class="footer-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Valutabookstore@master.com</span>
+                </div>
+                
+                <div class="footer-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(xx) 99899-218X</span>
+                </div>
+
+            </div>
+            
+            <div class="footer-line"></div>
+            
+            <div class="footer-bottom">
+                <p>Valuta Bookstore &copy; 2026</p>
+                <p class="dev-credito">Desenvolvido por <strong>Caique Soares</strong> - ADS</p>
+            </div>
+        </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
