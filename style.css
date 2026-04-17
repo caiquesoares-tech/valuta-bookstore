@@ -162,7 +162,7 @@ body:has(.container-produto) .hero-intro {
 }
 
 .card-livro {
-    width: 190px; /* Reduzido para ficar mais elegante */
+    width: 190px; /* Refinado */
     text-align: center;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação suave com "bounce" leve */
     cursor: pointer;
