@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valuta - Bookstore</title>
+    <title>Valuta - Detalhes do Livro</title>
     
-    <meta name="description" content="Valuta Bookstore - Onde o valor real está no conhecimento clássico.">
-    <meta name="author" content="Caique Soares - ADS">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -19,9 +16,9 @@
 <body>
 
     <header>
-        <h1 class="logo">
+        <a href="index.html" class="logo">
             <span class="logo-destaque">V</span><span class="logo-texto">aluta</span>
-        </h1>
+        </a>
         <p class="subtitle">Bookstore</p>
     </header>
 
@@ -33,26 +30,29 @@
             </div>
             
             <div class="search-container">
-                <input type="text" placeholder="Pesquisar obras ou autores..." id="search-input">
+                <input type="text" id="search-input" placeholder="Buscar no acervo...">
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
     </nav>
 
-    <section class="hero-intro">
-        <div class="hero-content">
-            <p class="frase">"O valor real do mundo é, em sua essência, o conhecimento de quem somos e das referências que temos na vida."</p>
-        </div>
-    </section>
-
     <main class="container">
-        <div class="section-header">
-            <h2>Classicos da líteratura</h2>
-            <div class="line"></div>
+        <div class="container-produto" id="detalhe-livro">
+            
+            <div class="produto-imagem">
+                <img id="detalhe-imagem" src="" alt="Capa do Livro">
+            </div>
+
+            <div class="produto-info">
+                <h1 id="detalhe-titulo"></h1> <p class="produto-autor">
+                    Por <span id="detalhe-autor"></span> </p>
+
+                <p id="detalhe-sinopse" class="sinopse-texto"></p> <div class="compra-area">
+                    <span class="preco-grande" id="detalhe-preco"></span> <button class="btn-comprar-grande">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+
         </div>
-        
-        <section id="vitrine-livros" class="livros-grid">
-            </section>
     </main>
 
     <footer>
@@ -85,6 +85,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="produto.js"></script>
 </body>
 </html>

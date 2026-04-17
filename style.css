@@ -1,6 +1,9 @@
 /* ============================================================
-   1. RESET E CONFIGURAÇÕES GERAIS
+   VALUTA - DESIGN FINALIZADO E ORGANIZADO (V. FINAL)
    ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -11,12 +14,11 @@ body {
     font-family: 'Lora', serif;
     background-color: #ffffff;
     color: #333;
-    line-height: 1.6;
     overflow-x: hidden;
 }
 
 /* ============================================================
-   2. HEADER E LOGO
+   CABEÇALHO (LOGO UNIFICADA - PADRONIZAÇÃO TOTAL)
    ============================================================ */
 header {
     background-color: #fff;
@@ -24,21 +26,36 @@ header {
     text-align: center;
 }
 
-.logo {
-    font-family: 'Cinzel', serif; 
-    font-size: 2.8rem;
-    color: #1a1a1a;
+.logo, 
+a.logo {
     display: flex;
     align-items: baseline;
     justify-content: center;
+    text-decoration: none !important;
     letter-spacing: 2px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.logo-texto, 
+.logo span:not(.logo-destaque) {
+    font-family: 'Cinzel', serif !important;
+    font-size: 2.8rem;
+    color: #1a1a1a !important;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: none;
 }
 
 .logo-destaque {
-    font-family: 'Cinzel Decorative', cursive;
-    font-size: 5.5rem; 
+    font-family: 'Cinzel Decorative', cursive !important;
+    font-size: 5.5rem;
     font-weight: 900;
-    color: #000;
+    color: #ff9f00;
+    text-shadow: 2px 2px 0px #000;
+    line-height: 1;
+    display: inline-block;
 }
 
 .subtitle {
@@ -46,21 +63,18 @@ header {
     text-transform: uppercase;
     letter-spacing: 8px;
     font-size: 0.75rem;
-    color: #ff9f00; 
-    margin-top: -12px;
+    color: #ff9f00;
+    margin-top: 10px;
     font-weight: 700;
 }
 
 /* ============================================================
-   3. NAVEGAÇÃO E BUSCA
+   NAVEGAÇÃO E BUSCA
    ============================================================ */
 nav {
     background-color: #fff;
-    padding: 12px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #f0f0f0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .nav-links {
@@ -72,162 +86,112 @@ nav {
     padding: 0 20px;
 }
 
-.menu-principal {
-    display: flex;
-    gap: 40px;
-}
-
 .menu-principal a {
     text-decoration: none;
     color: #333;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: color 0.3s ease;
-    position: relative;
+    margin-right: 35px;
 }
 
-.menu-principal a:hover {
-    color: #ff9f00;
-}
-
-/* Linha decorativa sob o menu no hover */
-.menu-principal a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #ff9f00;
-    transition: width 0.3s ease;
-}
-
-.menu-principal a:hover::after {
-    width: 100%;
+#link-carrinho {
+    color: #ff9f00 !important;
 }
 
 .search-container {
     display: flex;
     align-items: center;
-    background-color: #f5f5f7;
-    border-radius: 20px;
-    padding: 6px 15px;
-    border: 1px solid #eee;
 }
 
 .search-container input {
-    background: transparent;
     border: none;
+    border-bottom: 1px solid #eee;
+    background: transparent;
     outline: none;
-    font-size: 0.8rem;
-    width: 180px;
+    width: 140px;
+    padding: 5px;
 }
 
 .search-icon {
-    font-size: 0.9rem;
     color: #ff9f00;
-    margin-left: 5px;
-    cursor: default;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 8px;
 }
 
 /* ============================================================
-   4. VITRINE E CARDS DE LIVROS
+   CONTEÚDO VITRINE (INDEX) - AJUSTES DE TAMANHO E ANIMAÇÃO
    ============================================================ */
 .hero-intro {
-    padding: 50px 20px 30px;
+    padding: 60px 20px;
     text-align: center;
 }
 
 .frase {
     font-size: 1.4rem;
     font-style: italic;
-    max-width: 650px;
+    color: #444;
+    max-width: 800px;
     margin: 0 auto;
 }
 
-.container {
-    max-width: 1100px;
-    margin: 20px auto 60px;
+body:has(.container-produto) .hero-intro {
+    display: none !important;
+}
+
+.section-header {
+    text-align: center;
+    margin: 50px 0 30px;
 }
 
 .section-header h2 {
     font-family: 'Cinzel', serif;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-}
-
-.line {
-    width: 40px;
-    height: 2px;
-    background-color: #ff9f00;
-    margin: 12px auto 40px;
+    font-size: 2rem;
+    color: #1a1a1a;
 }
 
 .livros-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 35px;
+    gap: 45px; /* Gap levemente reduzido para acompanhar o novo tamanho */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Estilo do Card com Animação */
 .card-livro {
-    width: 220px;
-    padding: 15px;
+    width: 190px; /* Reduzido para ficar mais elegante */
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação suave com "bounce" leve */
     cursor: pointer;
-    border-radius: 8px;
-    background: #fff;
 }
 
-.card-livro:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.capa-container {
-    overflow: hidden; /* Mantém o zoom da imagem dentro do limite */
-    margin-bottom: 15px;
-}
-
-.capa-container img {
+.card-livro img {
     width: 100%;
-    height: 280px;
-    object-fit: contain;
-    transition: transform 0.5s ease;
+    height: 275px; /* Ajustado proporcionalmente */
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: box-shadow 0.4s ease;
 }
 
-.card-livro:hover .capa-container img {
-    transform: scale(1.05);
+/* Efeito de Relevo Sutil no Hover */
+.card-livro:hover {
+    transform: translateY(-10px); /* Eleva o livro */
 }
 
-.card-livro h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
+.card-livro:hover img {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Sombra cresce ao subir */
 }
 
-.autor-livro {
-    font-size: 0.8rem;
-    color: #777;
-    margin-bottom: 10px;
-}
-
-.preco {
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 15px;
-}
-
-/* Botões */
 .card-acoes {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .btn-detalhes {
@@ -235,99 +199,120 @@ nav {
     color: #fff;
     border: none;
     padding: 10px 18px;
-    border-radius: 25px;
-    font-size: 0.7rem;
     font-weight: 700;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: filter 0.3s ease, transform 0.3s ease;
+    border-radius: 4px;
+    font-size: 0.7rem;
 }
 
-.btn-add-carrinho {
+.btn-carrinho-circular {
     background-color: #ff9f00;
-    color: #fff;
-    border: none;
-    width: 38px;
-    height: 38px;
+    color: white;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.btn-detalhes:hover, .btn-add-carrinho:hover {
-    filter: brightness(1.1);
-    transform: scale(1.05);
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
 }
 
 /* ============================================================
-   5. RODAPÉ (FOOTER)
+   PÁGINA DE PRODUTO (DETALHES)
+   ============================================================ */
+.container-produto {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 50px auto;
+}
+
+.produto-imagem {
+    flex: 0 0 280px !important; 
+}
+
+.produto-imagem img {
+    width: 280px !important; 
+    height: 420px !important; 
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 15px 15px 40px rgba(0,0,0,0.12);
+}
+
+.produto-autor {
+    font-size: 1.4rem;
+    color: #000 !important;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.compra-area {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 80px;
+}
+
+.btn-comprar-grande {
+    background-color: #ff9f00;
+    color: #fff;
+    border: none;
+    padding: 15px 45px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/* ============================================================
+   RODAPÉ
    ============================================================ */
 footer {
-    background-color: #1a1a1a; 
-    color: #ffffff;
-    padding: 60px 20px 30px;
-    margin-top: 80px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 80px 20px;
     text-align: center;
+    margin-top: 100px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .footer-grid {
     display: flex;
     justify-content: center;
-    gap: 60px;
-    margin-bottom: 40px;
+    gap: 50px;
+    margin-bottom: 30px;
     flex-wrap: wrap;
 }
 
 .footer-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .footer-item i {
-    color: #ff9f00 !important;
-    font-size: 1.6rem;
-}
-
-.footer-item span {
-    color: #bbbbbb; 
-    font-size: 0.85rem;
+    color: #ff9f00;
+    font-size: 1.2rem;
 }
 
 .footer-line {
-    width: 30px;
-    height: 1px;
-    background-color: #333;
-    margin: 0 auto 25px;
+    border-top: 1px solid #333;
+    margin: 20px 0;
 }
 
 .footer-bottom {
-    font-size: 0.7rem;
-    color: #555;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    line-height: 1.8;
+    font-size: 0.8rem;
+    color: #888;
 }
 
 .dev-credito {
-    color: #777;
     margin-top: 5px;
-}
-
-.dev-credito strong {
-    color: #aaa;
-}
-
-/* Responsividade Básica */
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-        gap: 20px;
-    }
-    .footer-grid {
-        gap: 30px;
-    }
 }
