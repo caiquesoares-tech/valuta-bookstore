@@ -1,5 +1,5 @@
 /* ============================================================
-   SCRIPT PRINCIPAL - VALUTA LIVRARIA
+   SCRIPT PRINCIPAL - VALUTA LIVRARIA (VERSÃO CORRIGIDA)
    ============================================================ */
 
 // 1. BANCO DE DADOS (DATABASE)
@@ -16,20 +16,15 @@ const livros = [
     { id: 10, titulo: "A Metamorfose", autor: "Franz Kafka", preco: "39,90", imagem: "a-metamorfose.jpg" }
 ];
 
-// 2. SELEÇÃO DE ELEMENTOS DOM
 const vitrine = document.getElementById('vitrine-livros');
 const inputBusca = document.getElementById('search-input');
-const linkCarrinho = document.getElementById('link-carrinho');
 const containerDetalhe = document.getElementById('detalhe-livro');
-
-// Estado da aplicação
-let totalItensCarrinho = 0;
 
 /* ============================================================
    3. RENDERIZAÇÃO DA VITRINE (PÁGINA INICIAL)
    ============================================================ */
 function renderizarLivros(lista) {
-    if (!vitrine) return; // Só executa se estiver na Home
+    if (!vitrine) return;
     
     vitrine.innerHTML = ""; 
     
@@ -43,7 +38,7 @@ function renderizarLivros(lista) {
                 <div class="card-acoes">
                     <button class="btn-detalhes" onclick="irParaDetalhes(${livro.id})">Detalhes</button>
                     
-                    <button class="btn-carrinho-circular" onclick="adicionarAoCarrinho()" title="Adicionar ao Carrinho">
+                    <button class="btn-carrinho-circular" onclick="adicionarAoCarrinho(${livro.id})" title="Adicionar ao Carrinho">
                         <i class="fas fa-shopping-cart"></i>
                     </button>
                 </div>
@@ -52,12 +47,11 @@ function renderizarLivros(lista) {
 }
 
 /* ============================================================
-   4. CARREGAMENTO DA PÁGINA DE PRODUTO (DETALHES)
+   4. PÁGINA DE PRODUTO
    ============================================================ */
 function carregarDetalhesProduto() {
-    if (!containerDetalhe) return; // Só executa se estiver em produto.html
+    if (!containerDetalhe) return;
     
-    // Pega o ID da URL (ex: produto.html?id=1)
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     const livro = livros.find(l => l.id == id);
@@ -72,39 +66,51 @@ function carregarDetalhesProduto() {
                 <p class="produto-autor">${livro.autor}</p>
                 <p class="produto-sinopse">
                     Uma das obras mais impactantes de ${livro.autor}, agora disponível no acervo da Valuta. 
-                    Este exemplar traz reflexões imortais sobre a condição humana em uma edição impecável, 
-                    pensada para leitores que buscam a profundidade do conhecimento clássico.
+                    Este exemplar traz reflexões imortais sobre a condição humana.
                 </p>
                 <div class="compra-area">
-                    <button class="btn-comprar-grande" onclick="adicionarAoCarrinho()">
+                    <button class="btn-comprar-grande" onclick="adicionarAoCarrinho(${livro.id})">
                         Comprar Agora - R$ ${livro.preco}
                     </button>
                 </div>
             </div>`;
-    } else {
-        containerDetalhe.innerHTML = "<h2>Livro não encontrado no acervo.</h2>";
     }
 }
 
 /* ============================================================
-   5. SISTEMA DE BUSCA E NAVEGAÇÃO
+   5. SISTEMA DE CARRINHO (A GRANDE CORREÇÃO)
    ============================================================ */
 
-// Redirecionamento para a página de detalhes
+function adicionarAoCarrinho(id) {
+    // 1. Achar o livro no nosso "banco de dados" pelo ID
+    const livroSelecionado = livros.find(l => l.id === id);
+
+    if (livroSelecionado) {
+        // 2. Pegar o carrinho atual do LocalStorage (ou criar um vazio)
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        // 3. Adicionar o novo livro à lista
+        carrinho.push({
+            titulo: livroSelecionado.titulo,
+            preco: livroSelecionado.preco,
+            imagem: livroSelecionado.imagem
+        });
+
+        // 4. Salvar de volta no LocalStorage (O "BILHETE" QUE O CARRINHO.JS VAI LER)
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        // 5. Atualizar o contador visual na hora
+        atualizarContador();
+        
+        // AVISO REMOVIDO PARA MELHORAR A EXPERIÊNCIA DO USUÁRIO
+    }
+}
+
 function irParaDetalhes(id) { 
     window.location.href = `produto.html?id=${id}`; 
 }
 
-// Contador de Carrinho
-function adicionarAoCarrinho() {
-    totalItensCarrinho++;
-    if (linkCarrinho) {
-        // Atualiza o texto do menu para CARRINHO (2)
-        linkCarrinho.innerText = `CARRINHO (${totalItensCarrinho})`;
-    }
-}
-
-// Filtro de Busca (Título ou Autor)
+// Filtro de Busca
 if (inputBusca) {
     inputBusca.addEventListener('input', () => {
         const termo = inputBusca.value.toLowerCase();
@@ -122,4 +128,6 @@ if (inputBusca) {
 document.addEventListener('DOMContentLoaded', () => {
     renderizarLivros(livros);
     carregarDetalhesProduto();
+    // Garante que o contador comece certo ao abrir a página
+    if(typeof atualizarContador === 'function') atualizarContador();
 });

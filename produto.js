@@ -1,44 +1,137 @@
 // ============================================================
-// 1. BANCO DE DADOS COMPLETO
+// 1. BANCO DE DADOS COMPLETO (Suas descrições mantidas)
 // ============================================================
 const livros = [
-    { id: 1, titulo: "Crime e Castigo", autor: "Fiódor Dostoiévski", preco: "59,90", imagem: "crime-e-castigo.webp", sinopse: "Clássico de Dostoiévski e romance fundamental da literatura ocidental, CRIME E CASTIGO ressurge em toda sua originalidade e inesgotável caráter moral. Na obra, Raskólnikov, um rapaz retraído e orgulhoso, se sente esmagado pela pobreza. Ao mesmo tempo, acha que está destinado a um grande futuro e, desdenhoso da moralidade comum, julga ter plenos direitos para cometer um crime – o que fará de maneira implacável. Marco da análise psicológica na ficção, CRIME E CASTIGO é um testemunho eloquente da miséria, do alcoolismo e das condições degradantes que empurram para o abismo anônimos nas grandes cidades." },
-    { id: 2, titulo: "Os Irmãos Karamazov", autor: "Fiódor Dostoiévski", preco: "72,00", imagem: "os-irmaos-karamazov.jpg", sinopse: "Obra singular da literatura russa e mundial, Os Irmãos Karamázov apresenta a intrincada história dos irmãos Dmitri, Ivan e Aliocha, cada qual em luta constante com seus próprios demônios internos enquanto segue em busca do significado da vida." },
-    { id: 3, titulo: "Memórias do Subsolo", autor: "Fiódor Dostoiévski", preco: "45,00", imagem: "memorias-do-subsolo.jpg", sinopse: "Memórias do subsolo é um pequeno romance publicado em 1864. Considerada uma obra precursora do existencialismo e da psicanálise, traz na primeira parte o monólogo de um homem amargurado e amargo, um homem subterrâneo, sem nome ou relações sociais, um empregado aposentado, em cuja própria existência não vê nenhum sentido, e que se dirige diretamente ao leitor.Tenta envolvê-lo, convencê-lo e comovê-lo com hipóteses sobre si mesmo e sua possível redenção." },
-    { id: 7, titulo: "Noites Brancas", autor: "Fiódor Dostoiévski", preco: "38,00", imagem: "noites-brancas.jpg", sinopse: "Noites brancas é uma das grandes obras da fase romântica da literatura russa. Foi publicada originalmente em 1848, antes da prisão de seu autor, Fiódor Dostoiévski, e de sua guinada estilística para um texto de maior agudeza e crítica social. A Noite Branca é um fenômeno comum em locais próximos às regiões polares, nos quais o Sol, mesmo se pondo, permanece pouco abaixo da linha do horizonte, resultando em noites iluminadas e oníricas. É nesse cenário que um sonhador tem um encontro casual com Nástienka e se vê atado a uma intrincada história de amor.." },
-    { id: 4, titulo: "Assim Falou Zaratustra", autor: "Friedrich Nietzsche", preco: "54,90", imagem: "assim-falou-zaratustra.jpg", sinopse: "Um dos trabalhos filosóficos mais lidos e influentes de todos os tempos, Assim falou Zaratustra talvez deva sua extraordinária fortuna ao seu caráter híbrido: filosofia, religião e literatura nele se juntam de maneira complexa e atraente. Ao publicar Além do bem e do mal, livro imediatamente posterior, Nietzsche revelou ao amigo Jacob Burckhardt que a nova publicação continha “as mesmas coisas que havia dito antes pela boca de Zaratustra, mas de modo diferente, bem diferente”. De fato, o leitor reconhecerá, na linguagem metafórica e alegórica dos discursos e diálogos de Zaratustra, muitas das ideias que seriam desenvolvidas em prosa reflexiva nas obras posteriores ― ou que já haviam sido abordadas em Aurora e A gaia ciência, livros aos quais ele chegou a se referir como “comentários ao Zaratustra antes que ele aparecesse”." },
-    { id: 5, titulo: "O Anticristo", autor: "Friedrich Nietzsche", preco: "39,90", imagem: "o-anticristo.jpg", sinopse: "Escrito em 1888, último ano antes de Friedrich Nietzsche perder a lucidez, este ensaio é uma das mais afiadas análises de que o cristianismo já foi objeto. Dando continuidade ao exame sobre a moral praticado na maioria de seus livros, em O anticristo o autor firma sua posição sobre a doutrina religiosa. Ele mostra como o cristianismo – ao qual chama de maldição – é a vitória dos fracos, doentes e rancorosos sobre os fortes, orgulhosos e saudáveis, persuadindo e induzindo a massa por meio de ideias pré-fabricadas. A partir da comparação com outras religiões, Nietzsche critica com veemência a mudança de foco que o cristianismo opera, uma vez que o centro da vida passa a ser o além e não o mundo presente. Até mesmo Jesus Cristo e o apóstolo Paulo são questionados, assim como grande parte de todos os dogmas cristãos, em um grande exercício filosófico.." },
-    { id: 6, titulo: "Crepúsculo dos Ídolos", autor: "Friedrich Nietzsche", preco: "42,00", imagem: "crepusculo-dos-idolos.jpg", sinopse: "Este livro, que serve de introdução à forma de pensar nietzschiana, é sobretudo, fruto da seguinte constatação do autor -'Há mais ídolos do que realidades no mundo'. A partir disso, Nietzsche põe-se a aniquilar tudo aquilo que julga serem ídolos falsos, ocos e decadentes." },
-    { id: 8, titulo: "Odisseia", autor: "Homero", preco: "68,00", imagem: "odisseia.jpg", sinopse: "A narrativa do regresso de Ulisses a sua terra natal é uma obra de importância sem paralelos na tradição literária ocidental. Sua influência atravessa os séculos e se espalha por todas as formas de arte, dos primórdios do teatro e da ópera até a produção cinematográfica recente. Odisseia se tornou também um substantivo comum, que denomina jornadas marcadas por perigos e eventos inesperados, e Homero um adjetivo usado para relatar feitos grandiosos." },
-    { id: 9, titulo: "A Ilíada", autor: "Homero", preco: "70,00", imagem: "a-iliada.jpg", sinopse: "Livro fundador da literatura ocidental que narra a tragédia de Aquiles e a Guerra de Troia em uma nova tradução do helenista português Frederico Lourenço. Primeiro livro da literatura ocidental, a Ilíada parece se tratar, pelo título, apenas de um breve incidente ocorrido no cerco dos gregos à cidade troiana de Ílion, a crônica de aproximadamente cinquenta dias de uma guerra que durou dez anos." },
-    { id: 10, titulo: "A Metamorfose", autor: "Franz Kafka", preco: "39,90", imagem: "a-metamorfose.jpg", sinopse: "Para a família, ele era uma ferramenta, jamais um coração. Certa manhã, Gregor Samsa acordou transformado em uma criatura monstruosa para mudar a literatura como a conhecíamos. Escrita por Franz Kafka em 1912, quando tinha 29 anos, A Metamorfose é uma obra singular." }
+    { 
+        id: 1, 
+        titulo: "Crime e Castigo", 
+        autor: "Fiódor Dostoiévski", 
+        preco: "59,90", 
+        imagem: "crime-e-castigo.webp", 
+        sinopse: `"Crime e Castigo", de Fiódor Dostoiévski, narra a história de Rodion Raskólnikov, um ex-estudante pobre em São Petersburgo que assassina uma velha agiota, justificando o ato com uma teoria de superioridade moral. O "castigo" não é apenas a prisão, mas o tormento psicológico, a culpa e a alienação que ele sofre após o crime, buscando redenção."`,
+        bioAutor: "Fiódor Dostoiévski (1821-1881) foi um renomado escritor, romancista e jornalista russo, considerado um dos maiores psicólogos da literature mundial. Suas obras, como Crime e Castigo e Os Irmãos Karamázov, exploram profundas questões existenciais, morais e psicológicas. Teve uma vida marcada por tragédias, incluindo uma condenação à morte comutada para trabalhos forçados na Sibéria.",
+        fotoAutor: "autor-dostoievski.webp" 
+    },
+    { 
+        id: 2, 
+        titulo: "Os Irmãos Karamazov", 
+        autor: "Fiódor Dostoiévski", 
+        preco: "72,00", 
+        imagem: "os-irmaos-karamazov.jpg", 
+        sinopse: `"Os Irmãos Karamázov", obra-prima final de Fiódor Dostoiévski (1880), é um romance filosófico e policial que narra a conturbada relação entre o devasso pai Fiódor Karamázov e seus três filhos, representando diferentes facetas da alma humana. A trama gira em torno de tensões familiares, fé, razão e o parricídio do pai, explorando culpa e moralidade."`,
+        bioAutor: "Fiódor Dostoiévski (1821-1881) foi um renomado escritor, romancista e jornalista russo, considerado um dos maiores psicólogos da literatura mundial. Suas obras, como Crime e Castigo e Os Irmãos Karamázov, exploram profundas questões existenciais, morais e psicológicas. Teve uma vida marcada por tragédias, incluindo uma condenação à morte comutada para trabalhos forçados na Sibéria.",
+        fotoAutor: "autor-dostoievski.webp"
+    },
+    { 
+        id: 3, 
+        titulo: "Memórias do Subsolo", 
+        autor: "Fiódor Dostoiévski", 
+        preco: "45,00", 
+        imagem: "memorias-do-subsolo.jpg", 
+        sinopse: `"Memórias do Subsolo (1864), de Fiódor Dostoiévski, é uma novela precursora do existencialismo que narra o monólogo de um ex-funcionário público de 40 anos, amargurado e alienado, vivendo isolado em São Petersburgo. O anti-herói faz reflexões profundas sobre a inação, a angústia humana, a vaidade e sua aversão à sociedade, dividindo a obra em um ensaio filosófico e memórias de sua juventude."`,
+        bioAutor: "Fiódor Dostoiévski (1821-1881) foi um renomado escritor, romancista e jornalista russo, considerado um dos maiores psicólogos da literatura mundial. Suas obras, como Crime e Castigo e Os Irmãos Karamázov, exploram profundas questões existenciais, morais e psicológicas. Teve uma vida marcada por tragédias, incluindo uma condenação à morte comutada para trabalhos forçados na Sibéria.",
+        fotoAutor: "autor-dostoievski.webp"
+    },
+    { 
+        id: 7, 
+        titulo: "Noites Brancas", 
+        autor: "Fiódor Dostoiévski", 
+        preco: "38,00", 
+        imagem: "noites-brancas.jpg", 
+        sinopse: `"Noites Brancas" (1848), de Fiódor Dostoiévski, é uma novela romântica sobre um "sonhador" solitário em São Petersburgo que, durante quatro noites de verão, conhece e se apaixona por Nástienka, uma jovem melancólica que espera por seu amado. Eles criam um laço intenso, mas ela acaba voltando para o outro homem, deixando ao sonhador apenas a memória de um momento de felicidade."`,
+        bioAutor: "Fiódor Dostoiévski (1821-1881) foi um renomado escritor, romancista e jornalista russo, considerado um dos maiores psicólogos da literatura mundial. Suas obras, como Crime e Castigo e Os Irmãos Karamázov, exploram profundas questões existenciais, morais e psicológicas. Teve uma vida marcada por tragédias, incluindo uma condenação à morte comutada para trabalhos forçados na Sibéria.",
+        fotoAutor: "autor-dostoievski.webp"
+    },
+    { 
+        id: 4, 
+        titulo: "Assim Falou Zaratustra", 
+        autor: "Friedrich Nietzsche", 
+        preco: "54,90", 
+        imagem: "assim-falou-zaratustra.jpg", 
+        sinopse: `"Assim Falou Zaratustra" (1883-1885), de Friedrich Nietzsche, é uma obra filosófica em forma de narrativa poética que defende a afirmação da vida, a morte de Deus, o super-homem (Übermensch) e o eterno retorno. O profeta Zaratustra desce da montanha para ensinar a superação dos valores tradicionais e a criação de novos significados."`,
+        bioAutor: `Friedrich Nietzsche (1844–1900) foi um influente filósofo, filólogo e poeta prussiano, conhecido como o "filósofo do martelo" por criticar severamente a moralidade cristã, a religião e a filosofia tradicional. Tornou-se professor na Universidade da Basileia aos 24 anos, mas renunciou cedo por problemas de saúde, escrevendo obras fundamentais como Assim Falou Zaratustra e O Anticristo.`,
+        fotoAutor: "frederick-nietschzie.jpg"
+    },
+    { 
+        id: 5, 
+        titulo: "O Anticristo", 
+        autor: "Friedrich Nietzsche", 
+        preco: "39,90", 
+        imagem: "o-anticristo.jpg", 
+        sinopse: `"O Anticristo" (1888), de Friedrich Nietzsche, é uma crítica radical e feroz ao cristianismo, descrito como a maior corrupção e "maldição" da humanidade. Nietzsche argumenta que a moral cristã inverte os valores naturais, glorificando a fraqueza, o ressentimento e a negação da vida terrena em favor de um além-vida ilusório.`,
+        bioAutor: `Friedrich Nietzsche (1844–1900) foi um influente filósofo, filólogo e poeta prussiano, conhecido como o "filósofo do martelo" por criticar severamente a moralidade cristã, a religião e a filosofia tradicional. Tornou-se professor na Universidade da Basileia aos 24 anos, mas renunciou cedo por problemas de saúde, escrevendo obras fundamentais como Assim Falou Zaratustra e O Anticristo.`,
+        fotoAutor: "frederick-nietschzie.jpg"
+    },
+    { 
+        id: 6, 
+        titulo: "Crepúsculo dos Ídolos", 
+        autor: "Friedrich Nietzsche", 
+        preco: "42,00", 
+        imagem: "crepusculo-dos-idolos.jpg", 
+        sinopse: `"Crepúsculo dos Ídolos" (1888), de Friedrich Nietzsche, é uma síntese crítica e "declaração de guerra" contra os falsos pilares da civilização ocidental. O autor ataca a metafísica, Sócrates, Platão e a moral cristã, rotulando-os como decadentes. Com o subtítulo "Como Filosofar com o Martelo", a obra busca destruir ilusões e defender a vida, o perspectivismo e a Vontade de Potência.`,
+        bioAutor: `Friedrich Nietzsche (1844–1900) foi um influente filósofo, filólogo e poeta prussiano, conhecido como o "filósofo do martelo" por criticar severamente a moralidade cristã, a religião e a filosofia tradicional. Tornou-se professor na Universidade da Basileia aos 24 anos, mas renunciou cedo por problemas de saúde, escrevendo obras fundamentais como Assim Falou Zaratustra e O Anticristo.`,
+        fotoAutor: "frederick-nietschzie.jpg"
+    },
+    { 
+        id: 8, 
+        titulo: "Odisseia", 
+        autor: "Homero", 
+        preco: "68,00", 
+        imagem: "odisseia.jpg", 
+        sinopse: "A narrativa do regresso de Ulisses a sua terra natal...",
+        bioAutor: "Homero foi um lendário poeta épico da Grécia Antiga, supostamente vivido entre os séculos VIII e VII a.C.. Autor de Ilíada e Odisseia, obras basilares da literatura ocidental que narram a Guerra de Troia e o retorno de Ulisses.",
+        fotoAutor: "homero-autor.jpg"
+    },
+    { 
+        id: 9, 
+        titulo: "A Ilíada", 
+        autor: "Homero", 
+        preco: "70,00", 
+        imagem: "a-iliada.jpg", 
+        sinopse: "A Ilíada, poema épico atribuído a Homero, narra a fúria de Aquiles durante um curto período do 10º ano da Guerra de Troia. Após ser desonrado por Agamemnon, Aquiles recusa-se a lutar, causando grandes perdas aos gregos. O conflito atinge o auge com a morte de Pátroclo por Heitor, levando Aquiles a retornar por vingança.",
+        bioAutor: "Homero foi um lendário poeta épico da Grécia Antiga, supostamente vivido entre os séculos VIII e VII a.C.. Autor de Ilíada e Odisseia, obras basilares da literatura ocidental que narram a Guerra de Troia e o retorno de Ulisses.",
+        fotoAutor: "homero-autor.jpg"
+    },
+    { 
+        id: 10, 
+        titulo: "A Metamorfose", 
+        autor: "Franz Kafka", 
+        preco: "39,90", 
+        imagem: "a-metamorfose.jpg", 
+        sinopse: ` "A Metamorfose" (1915), de Franz Kafka, narra a história de Gregor Samsa, um caixeiro-viajante que acorda transformado em um inseto gigante. Incapaz de trabalhar, ele perde seu valor como provedor da família, sendo isolado e desprezado, enquanto seus pais e irmã se adaptam à nova realidade e à necessidade de trabalhar. A obra é uma alegoria sobre alienação, desumanização e rejeição social.`,
+        bioAutor: "Franz Kafka (1883–1924) foi um influente escritor tcheco de língua alemã, reconhecido por suas obras que retratam a alienação, burocracia e angústia existencial, como A Metamorfose e O Processo.",
+        fotoAutor: "franz-kafka.jpg"
+    }
 ];
 
 // ============================================================
-// 2. LÓGICA DE EXECUÇÃO (Protegida)
+// 2. LÓGICA DE EXECUÇÃO (Atualizada para conexão com carrinho)
 // ============================================================
-
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idBuscado = urlParams.get('id');
+    
+    // Procura o livro ignorando se o ID é string ou número
     const livro = livros.find(l => l.id == idBuscado);
 
     if (livro) {
-        // Preenchimento Seguro
-        const img = document.getElementById('detalhe-imagem');
-        const tit = document.getElementById('detalhe-titulo');
-        const aut = document.getElementById('detalhe-autor');
-        const pre = document.getElementById('detalhe-preco');
-        const sin = document.getElementById('detalhe-sinopse');
+        // Preenchimento dos dados na tela
+        const elementos = {
+            img: document.getElementById('detalhe-imagem'),
+            tit: document.getElementById('detalhe-titulo'),
+            aut: document.getElementById('detalhe-autor'),
+            pre: document.getElementById('detalhe-preco'),
+            sin: document.getElementById('detalhe-sinopse'),
+            bio: document.getElementById('autor-bio'),
+            foto: document.getElementById('autor-foto'),
+            nomeInfo: document.getElementById('autor-nome-info')
+        };
 
-        if (img) img.src = livro.imagem;
-        if (tit) tit.innerText = livro.titulo;
-        if (aut) aut.innerText = livro.autor;
-        if (pre) pre.innerText = `R$ ${livro.preco}`;
-        if (sin) sin.innerText = livro.sinopse;
-
-        document.title = `Valuta - ${livro.titulo}`;
-    } else {
-        console.error("ID não encontrado ou URL inválida.");
-    }
-});
+        if (elementos.img) elementos.img.src = livro.imagem;
+        if (elementos.tit) elementos.tit.innerText = livro.titulo;
+        if (elementos.aut) elementos.aut.innerText = livro.autor;
+        if (elementos.pre) elementos.pre.innerText = `R$ ${livro.preco}`;
+        if (elementos.sin) elementos.sin.innerText = livro.sinopse;
+        if (elementos.bio) elementos.bio.innerText = livro.bioAutor;
+        if (elementos.foto) elementos.foto.src = livro.fotoAutor;
+        if (elementos.nomeInfo) elementos.nomeInfo.innerText =

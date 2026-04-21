@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valuta - Seu Carrinho</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Área central do carrinho */
+        .carrinho-layout {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: 400px; /* Garante espaço caso o carrinho esteja vazio */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #lista-itens-carrinho {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .item-carrinho-box {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f2f2f2;
+            padding: 20px 0;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Fechamento vertical e centralizado */
+        .carrinho-fechamento {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            width: 100%;
+            gap: 5px;
+            text-align: center;
+        }
+
+        .label-preco-final {
+            font-size: 0.7rem;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        #valor-total {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Botão Amarelo Valuta */
+        .btn-comprar-grande {
+            background-color: #ff9f00; 
+            color: #000;
+            width: 100%;
+            max-width: 350px;
+            padding: 18px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+
+        .btn-comprar-grande:hover {
+            opacity: 0.8;
+        }
+
+        .link-voltar-shopping {
+            margin-top: 15px;
+            font-size: 0.65rem;
+            color: #aaa;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1 class="logo">
+                <span class="logo-destaque">V</span><span class="logo-texto">aluta</span>
+            </h1>
+        </a>
+        <p class="subtitle">Bookstore</p>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <div class="menu-principal">
+                <a href="index.html">Início</a>
+                <a href="carrinho.html" id="link-carrinho">CARRINHO (<span id="contagem-carrinho">0</span>)</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Pesquisar obras ou autores..." id="search-input">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="carrinho-layout">
+        <div id="lista-itens-carrinho"></div>
+
+        <section class="carrinho-fechamento">
+            <span class="label-preco-final">Preço Final</span>
+            <span id="valor-total">R$ 0,00</span>
+            
+            <button id="btn-finalizar" class="btn-comprar-grande">Finalizar Compra</button>
+            
+            <a href="index.html" class="link-voltar-shopping">+ Continuar Explorando Acervo</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@Valutabookstoreoficial</span>
+                </div>
+                
+                <div class="footer-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contato@valutabookstore.com</span>
+                </div>
+                
+                <div class="footer-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(xx) 99899-218X</span>
+                </div>
+            </div>
+            
+            <div class="footer-line"></div>
+            
+            <div class="footer-bottom">
+                <p>Valuta Bookstore &copy; 2026</p>
+                <p class="dev-credito">Desenvolvido por <strong>Caique Soares</strong> - ADS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="carrinho.js"></script>
+    <script>
+        function atualizarContador() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            const elementoContador = document.getElementById('contagem-carrinho');
+            if (elementoContador) {
+                elementoContador.innerText = carrinho.length;
+            }
+        }
+        window.addEventListener('DOMContentLoaded', atualizarContador);
+    </script>
+</body>
+</html>

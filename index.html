@@ -29,7 +29,7 @@
         <div class="nav-links">
             <div class="menu-principal">
                 <a href="index.html">Início</a>
-                <a href="#" id="link-carrinho">CARRINHO (0)</a>
+                <a href="carrinho.html" id="link-carrinho">CARRINHO (<span id="contagem-carrinho">0</span>)</a>
             </div>
             
             <div class="search-container">
@@ -47,7 +47,7 @@
 
     <main class="container">
         <div class="section-header">
-            <h2>Classicos da líteratura</h2>
+            <h2>Clássicos da Literatura</h2>
             <div class="line"></div>
         </div>
         
@@ -86,5 +86,16 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Pequena função para manter o contador atualizado ao carregar a página
+        function atualizarContador() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            const elementoContador = document.getElementById('contagem-carrinho');
+            if (elementoContador) {
+                elementoContador.innerText = carrinho.length;
+            }
+        }
+        window.addEventListener('DOMContentLoaded', atualizarContador);
+    </script>
 </body>
 </html>
