@@ -1,105 +1,129 @@
 /* ============================================================
-   LÓGICA DO CARRINHO - VALUTA BOOKSTORE (LISTA VERTICAL PURA)
+   PRODUTO.JS - VALUTA LIVRARIA (VERSÃO INTEGRAL)
    ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-    const listaHtml = document.getElementById('lista-itens-carrinho');
-    const totalHtml = document.getElementById('valor-total');
-    const contadorMenu = document.getElementById('contagem-carrinho');
+// 1. BANCO DE DADOS INTEGRADO
+const livros = [
+    { id: 1, titulo: "Crime e Castigo", autor: "Fiódor Dostoiévski", preco: "59,90", imagem: "crime-e-castigo.webp", bio: "Fiódor Dostoiévski é um dos maiores nomes da literatura russa, explorando a psicologia humana em situações extremas.", foto: "autor-dostoievski.jpg" },
+    { id: 2, titulo: "Os Irmãos Karamazov", autor: "Fiódor Dostoiévski", preco: "72,00", imagem: "os-irmaos-karamazov.jpg", bio: "Dostoiévski explorou profundamente a fé, a dúvida e a razão nesta que é sua obra-prima final.", foto: "autor-dostoievski.jpg" },
+    { id: 3, titulo: "Memórias do Subsolo", autor: "Fiódor Dostoiévski", preco: "45,00", imagem: "memorias-do-subsolo.jpg", bio: "Obra visceral que antecipa muitos dos temas do existencialismo moderno.", foto: "autor-dostoievski.jpg" },
+    { id: 7, titulo: "Noites Brancas", autor: "Fiódor Dostoiévski", preco: "38,00", imagem: "noites-brancas.jpg", bio: "Um mestre do romance psicológico russo.", foto: "autor-dostoievski.jpg" },
+    { id: 4, titulo: "Assim Falou Zaratustra", autor: "Friedrich Nietzsche", preco: "54,90", imagem: "assim-falou-zaratustra.jpg", bio: "Filósofo alemão cujas ideias sobre o além-homem mudaram o pensamento ocidental.", foto: "autor-nietzsche.jpg" },
+    { id: 5, titulo: "O Anticristo", autor: "Friedrich Nietzsche", preco: "39,90", imagem: "o-anticristo.jpg", bio: "Crítico feroz da moralidade tradicional, desafia os pilares da civilização.", foto: "autor-nietzsche.jpg" },
+    { id: 6, titulo: "Crepúsculo dos Ídolos", autor: "Friedrich Nietzsche", preco: "42,00", imagem: "crepusculo-dos-idolos.jpg", bio: "A filosofia de Nietzsche condensada em aforismos provocativos.", foto: "autor-nietzsche.jpg" },
+    { id: 8, titulo: "Odisseia", autor: "Homero", preco: "68,00", imagem: "odisseia.jpg", bio: "Lendário poeta grego a quem se atribui a fundação da literatura ocidental.", foto: "autor-homero.jpg" },
+    { id: 9, titulo: "A Ilíada", autor: "Homero", preco: "70,00", imagem: "a-iliada.jpg", bio: "Homero narra a épica Guerra de Troia através dos séculos.", foto: "autor-homero.jpg" },
+    { id: 10, titulo: "A Metamorfose", autor: "Franz Kafka", preco: "39,90", imagem: "a-metamorfose.jpg", bio: "Kafka retratou a alienação e o absurdo da condição humana moderna.", foto: "autor-kafka.jpg" }
+];
+
+/* ============================================================
+   2. FUNÇÕES DE RENDERIZAÇÃO
+   ============================================================ */
+
+function inicializarPagina() {
+    atualizarContadorMenu();
     
-    // Recupera os dados do LocalStorage
+    // Se estiver na página de PRODUTO (detalhes)
+    if (document.getElementById('detalhe-titulo')) {
+        carregarDadosDoProduto();
+    }
+    
+    // Se estiver na página de CARRINHO (lista)
+    if (document.getElementById('lista-itens-carrinho')) {
+        renderizarCarrinho();
+    }
+}
+
+function carregarDadosDoProduto() {
+    const params = new URLSearchParams(window.location.search);
+    const idUrl = params.get('id');
+    const livro = livros.find(l => Number(l.id) === Number(idUrl));
+
+    if (livro) {
+        document.getElementById('detalhe-titulo').innerText = livro.titulo;
+        document.getElementById('detalhe-autor').innerText = livro.autor;
+        document.getElementById('detalhe-imagem').src = livro.imagem;
+        document.getElementById('detalhe-preco').innerText = `R$ ${livro.preco}`;
+        document.getElementById('detalhe-sinopse').innerText = 
+            `Uma das obras mais impactantes de ${livro.autor}, agora disponível no acervo da Valuta. Este exemplar traz reflexões imortais sobre a condição humana.`;
+
+        document.getElementById('autor-nome-info').innerText = livro.autor;
+        document.getElementById('autor-bio').innerText = livro.bio;
+        
+        const fotoAutor = document.getElementById('autor-foto');
+        if (fotoAutor) { fotoAutor.src = livro.foto; }
+
+        const btnCompra = document.querySelector('.btn-comprar-grande');
+        if (btnCompra) {
+            btnCompra.onclick = () => adicionarAoCarrinho(livro.id);
+        }
+    }
+}
+
+/* ============================================================
+   3. SISTEMA DE CARRINHO (ADICIONAR, REMOVER, RENDERIZAR)
+   ============================================================ */
+
+function adicionarAoCarrinho(id) {
+    const livroSelecionado = livros.find(l => l.id === id);
+    if (livroSelecionado) {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        carrinho.push(livroSelecionado);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizarContadorMenu();
+        alert(`"${livroSelecionado.titulo}" foi adicionado!`);
+    }
+}
+
+function renderizarCarrinho() {
+    const lista = document.getElementById('lista-itens-carrinho');
+    const totalElemento = document.getElementById('preco-total-carrinho');
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-    function renderizarCarrinho() {
-        // 1. Atualiza o contador do menu superior se ele existir
-        if (contadorMenu) {
-            contadorMenu.innerText = carrinho.length;
-        }
-
-        if (!listaHtml) return;
-
-        // 2. Limpa a lista para renderização do zero
-        listaHtml.innerHTML = ''; 
-
-        // 3. Caso o carrinho esteja vazio
-        if (carrinho.length === 0) {
-            listaHtml.innerHTML = `
-                <div style="text-align: center; padding: 60px 0; color: #999; border: 1px dashed #eee; width: 100%;">
-                    <p style="font-family: 'Cinzel', serif; font-size: 1.1rem;">Sua biblioteca pessoal está vazia.</p>
-                    <a href="index.html" style="color: #b8977e; font-size: 0.8rem; text-decoration: none;">Retornar ao Acervo</a>
-                </div>
-            `;
-            if (totalHtml) totalHtml.innerText = "R$ 0,00";
-            return;
-        }
-
+    
+    if (lista) {
+        lista.innerHTML = "";
         let somaTotal = 0;
 
-        // 4. Renderização Vertical (Uma box por livro)
         carrinho.forEach((item, index) => {
-            const divItem = document.createElement('div');
-            divItem.className = 'item-carrinho-box'; // Garanta que esta classe esteja no seu CSS
-
-            divItem.innerHTML = `
-                <img src="${item.imagem}" alt="${item.titulo}" style="width: 70px; height: 100px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                
-                <div style="flex: 1; padding-left: 20px;">
-                    <h4 style="font-family: 'Cinzel', serif; margin: 0; font-size: 1.1rem; color: #1a1a1a;">${item.titulo}</h4>
-                    <p style="margin: 5px 0; color: #888; font-size: 0.8rem;">Valor unitário: R$ ${item.preco}</p>
-                    <button onclick="removerDoCarrinho(${index})" style="background: none; border: none; color: #cc0000; cursor: pointer; font-size: 0.75rem; text-decoration: underline; padding: 0;">[ Remover Obra ]</button>
-                </div>
-
-                <div style="font-family: 'Cinzel', serif; font-weight: bold; font-size: 1.2rem; color: #1a1a1a; min-width: 100px; text-align: right;">
-                    R$ ${item.preco}
+            lista.innerHTML += `
+                <div class="item-carrinho">
+                    <img src="${item.imagem}" alt="${item.titulo}" style="width: 50px;">
+                    <div class="item-info">
+                        <h4>${item.titulo}</h4>
+                        <p>R$ ${item.preco}</p>
+                        <button onclick="removerDoCarrinho(${index})" class="btn-remover">Remover</button>
+                    </div>
                 </div>
             `;
-            
-            listaHtml.appendChild(divItem);
-
-            // 5. LÓGICA DE SOMA (Tratamento rigoroso de String para Número)
-            if (item.preco) {
-                // Remove R$, pontos de milhar e troca vírgula por ponto decimal
-                let precoLimpo = String(item.preco)
-                    .replace('R$', '')
-                    .replace(/\./g, '')
-                    .replace(',', '.')
-                    .trim();
-                
-                somaTotal += parseFloat(precoLimpo) || 0;
-            }
+            // Converte "59,90" para 59.90 para somar
+            somaTotal += parseFloat(item.preco.replace(',', '.'));
         });
 
-        // 6. Atualiza o valor final no rodapé com formatação brasileira
-        if (totalHtml) {
-            totalHtml.innerText = "R$ " + somaTotal.toFixed(2).replace('.', ',');
+        if (totalElemento) {
+            totalElemento.innerText = `R$ ${somaTotal.toFixed(2).replace('.', ',')}`;
         }
     }
+}
 
-    // Função de remoção (Global para o onclick funcionar)
-    window.removerDoCarrinho = (index) => {
-        carrinho.splice(index, 1);
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        renderizarCarrinho();
-        
-        // Sincroniza o contador da index se houver
-        const contadorIndex = document.getElementById('contagem-carrinho');
-        if(contadorIndex) contadorIndex.innerText = carrinho.length;
-    };
-
-    // Lógica do botão finalizar
-    const btnFinalizar = document.getElementById('btn-finalizar');
-    if (btnFinalizar) {
-        btnFinalizar.onclick = () => {
-            if (carrinho.length > 0) {
-                alert('Aquisição processada! As obras foram enviadas para seu registro.');
-                localStorage.removeItem('carrinho');
-                window.location.href = 'index.html';
-            } else {
-                alert('Adicione obras para finalizar a compra.');
-            }
-        };
-    }
-
-    // Inicializa a página
+function removerDoCarrinho(index) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.splice(index, 1);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
     renderizarCarrinho();
-});
+    atualizarContadorMenu();
+}
+
+function atualizarContadorMenu() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const linkCarrinho = document.getElementById('link-carrinho');
+    const contagemSpan = document.getElementById('contagem-carrinho');
+    
+    if (linkCarrinho) {
+        linkCarrinho.innerHTML = `CARRINHO (<span id="contagem-carrinho">${carrinho.length}</span>)`;
+    }
+}
+
+/* ============================================================
+   4. INICIALIZAÇÃO
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', inicializarPagina);

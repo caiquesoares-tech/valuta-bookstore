@@ -52,13 +52,12 @@
         </div>
         
         <section id="vitrine-livros" class="livros-grid">
-            </section>
+        </section>
     </main>
 
     <footer>
         <div class="footer-container">
             <div class="footer-grid">
-                
                 <div class="footer-item">
                     <i class="fab fa-instagram"></i>
                     <span>@Valutabookstoreoficial</span>
@@ -73,7 +72,6 @@
                     <i class="fas fa-phone"></i>
                     <span>(xx) 99899-218X</span>
                 </div>
-
             </div>
             
             <div class="footer-line"></div>
@@ -85,17 +83,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script>
-        // Pequena função para manter o contador atualizado ao carregar a página
-        function atualizarContador() {
-            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-            const elementoContador = document.getElementById('contagem-carrinho');
-            if (elementoContador) {
-                elementoContador.innerText = carrinho.length;
-            }
-        }
-        window.addEventListener('DOMContentLoaded', atualizarContador);
-    </script>
+    <script src="produto.js"></script>
 </body>
 </html>

@@ -136,6 +136,7 @@ nav {
     margin: 0 auto;
 }
 
+/* Regra para ocultar intro apenas quando o container de produto existe */
 body:has(.container-produto) .hero-intro {
     display: none !important;
 }
@@ -240,6 +241,10 @@ body:has(.container-produto) .hero-intro {
     object-fit: cover;
     border-radius: 4px;
     box-shadow: 15px 15px 40px rgba(0,0,0,0.12);
+}
+
+.produto-info {
+    flex: 1;
 }
 
 .produto-autor {
@@ -378,7 +383,7 @@ footer {
 }
 
 /* ============================================================
-   ESTILOS EXCLUSIVOS DO CARRINHO (SIDEBAR DIREITA) - CORRIGIDO
+   ESTILOS EXCLUSIVOS DO CARRINHO (SIDEBAR DIREITA)
    ============================================================ */
 
 .carrinho-layout {
@@ -502,7 +507,7 @@ footer {
 }
 
 /* ============================================================
-   RESPONSIVIDADE E MELHORIAS MOBILE (AJUSTADO)
+   RESPONSIVIDADE - MOBILE (INJETADO SEM ALTERAR DESKTOP)
    ============================================================ */
 @media (max-width: 768px) {
     .logo-texto { font-size: 1.8rem !important; }
@@ -516,9 +521,21 @@ footer {
     .card-livro { width: 165px; }
     .card-livro img { height: 240px; }
 
-    .container-produto { flex-direction: column; align-items: center; gap: 30px; padding: 0 20px; margin-top: 30px; }
-    .produto-imagem, .produto-imagem img { width: 100% !important; max-width: 240px !important; height: auto !important; }
-    .produto-info { text-align: center; }
+    /* Correção Crítica da Página de Detalhes no Mobile */
+    .container-produto { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 30px; 
+        padding: 0 20px; 
+        margin-top: 30px;
+        display: flex !important; /* Garante que não suma */
+    }
+    .produto-imagem, .produto-imagem img { 
+        width: 100% !important; 
+        max-width: 240px !important; 
+        height: auto !important; 
+    }
+    .produto-info { text-align: center; width: 100%; }
     .compra-area { flex-direction: column; width: 100%; gap: 20px; margin-top: 40px; }
     .btn-comprar-grande { width: 100%; }
 
@@ -528,13 +545,11 @@ footer {
 
     .footer-grid { flex-direction: column; gap: 25px; }
 
+    /* Carrinho Mobile */
     .carrinho-layout { flex-direction: column; gap: 30px; margin: 20px auto; }
     .carrinho-banner { border-left: none; border-bottom: 4px solid #ff9f00; padding-left: 0; padding-bottom: 20px; text-align: center; }
     .carrinho-banner h2 { font-size: 1.8rem; }
     .carrinho-lateral { width: 100% !important; padding: 15px; }
-    .item-carrinho { gap: 10px; }
-    .item-carrinho img { width: 60px; height: 85px; }
-    .total-container { font-size: 1.2rem; }
 }
 
 @media (max-width: 480px) {

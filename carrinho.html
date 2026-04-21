@@ -24,7 +24,7 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 60px 20px;
-            min-height: 400px; /* Garante espaço caso o carrinho esteja vazio */
+            min-height: 400px; 
             display: flex;
             flex-direction: column;
         }
@@ -35,7 +35,8 @@
             width: 100%;
         }
 
-        .item-carrinho-box {
+        /* Estilo dos cards que o JS vai injetar */
+        .item-carrinho {
             display: flex;
             align-items: center;
             border-bottom: 1px solid #f2f2f2;
@@ -44,7 +45,30 @@
             width: 100%;
         }
 
-        /* Fechamento vertical e centralizado */
+        .item-carrinho img {
+            width: 80px;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-info h4 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+        }
+
+        .btn-remover {
+            background: none;
+            border: none;
+            color: #cc0000;
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 5px 0;
+            text-decoration: underline;
+        }
+
+        /* Fechamento */
         .carrinho-fechamento {
             margin-top: 50px;
             display: flex;
@@ -63,7 +87,7 @@
             font-weight: bold;
         }
 
-        #valor-total {
+        #preco-total-carrinho {
             font-family: 'Cinzel', serif;
             font-size: 2.2rem;
             color: #1a1a1a;
@@ -71,7 +95,6 @@
             margin-bottom: 20px;
         }
 
-        /* Botão Amarelo Valuta */
         .btn-comprar-grande {
             background-color: #ff9f00; 
             color: #000;
@@ -121,7 +144,7 @@
         <div class="nav-links">
             <div class="menu-principal">
                 <a href="index.html">Início</a>
-                <a href="carrinho.html" id="link-carrinho">CARRINHO (<span id="contagem-carrinho">0</span>)</a>
+                <a href="carrinho.html" id="link-carrinho">CARRINHO (0)</a>
             </div>
             
             <div class="search-container">
@@ -136,7 +159,7 @@
 
         <section class="carrinho-fechamento">
             <span class="label-preco-final">Preço Final</span>
-            <span id="valor-total">R$ 0,00</span>
+            <span id="preco-total-carrinho">R$ 0,00</span>
             
             <button id="btn-finalizar" class="btn-comprar-grande">Finalizar Compra</button>
             
@@ -172,16 +195,6 @@
         </div>
     </footer>
 
-    <script src="carrinho.js"></script>
-    <script>
-        function atualizarContador() {
-            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-            const elementoContador = document.getElementById('contagem-carrinho');
-            if (elementoContador) {
-                elementoContador.innerText = carrinho.length;
-            }
-        }
-        window.addEventListener('DOMContentLoaded', atualizarContador);
-    </script>
+    <script src="produto.js"></script>
 </body>
 </html>
