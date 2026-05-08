@@ -7,24 +7,20 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@900&family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 
     <style>
-        body {
-            background-color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Área central do carrinho */
+        /* Ajustes específicos para a área de conteúdo do carrinho */
         .carrinho-layout {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 60px 20px;
-            min-height: 400px; 
+            min-height: 50vh; 
             display: flex;
             flex-direction: column;
         }
@@ -35,26 +31,39 @@
             width: 100%;
         }
 
-        /* Estilo dos cards que o JS vai injetar */
         .item-carrinho {
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #f2f2f2;
+            border-bottom: 1px solid #eee;
             padding: 20px 0;
-            gap: 20px;
+            gap: 25px;
             width: 100%;
         }
 
         .item-carrinho img {
-            width: 80px;
+            width: 100px;
             height: auto;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .item-info {
+            flex-grow: 1;
         }
 
         .item-info h4 {
-            margin: 0;
+            margin: 0 0 5px 0;
             font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+        }
+
+        .item-info .autor-cart {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            color: #b88b5d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .btn-remover {
@@ -62,135 +71,149 @@
             border: none;
             color: #cc0000;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
             padding: 5px 0;
             text-decoration: underline;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Fechamento */
         .carrinho-fechamento {
             margin-top: 50px;
             display: flex;
             flex-direction: column;
             align-items: center; 
             width: 100%;
-            gap: 5px;
+            gap: 10px;
             text-align: center;
         }
 
         .label-preco-final {
-            font-size: 0.7rem;
-            color: #000;
+            font-size: 0.8rem;
+            color: #b88b5d;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: bold;
         }
 
         #preco-total-carrinho {
             font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #1a1a1a;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
         }
 
-        .btn-comprar-grande {
-            background-color: #ff9f00; 
-            color: #000;
+        /* Reutilizando o estilo de botão da Valuta */
+        .btn-finalizar-compra {
+            background-color: #1a1a1a;
+            color: #fff;
             width: 100%;
-            max-width: 350px;
-            padding: 18px;
+            max-width: 400px;
+            padding: 20px;
             border: none;
             cursor: pointer;
             font-family: 'Cinzel', serif;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.3s;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
         }
 
-        .btn-comprar-grande:hover {
-            opacity: 0.8;
+        .btn-finalizar-compra:hover {
+            background-color: #b88b5d;
+            transform: translateY(-2px);
         }
 
         .link-voltar-shopping {
-            margin-top: 15px;
-            font-size: 0.65rem;
-            color: #aaa;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: #888;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
         }
 
-        .logo-link {
-            text-decoration: none;
-            color: inherit;
+        .link-voltar-shopping:hover {
+            color: #b88b5d;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="index.html" class="logo-link">
-            <h1 class="logo">
-                <span class="logo-destaque">V</span><span class="logo-texto">aluta</span>
-            </h1>
-        </a>
-        <p class="subtitle">Bookstore</p>
-    </header>
-
-    <nav>
-        <div class="nav-links">
-            <div class="menu-principal">
+    <!-- HEADER PADRONIZADO -->
+    <header class="main-header">
+        <div class="container navbar">
+            <div class="nav-links-left">
                 <a href="index.html">Início</a>
-                <a href="carrinho.html" id="link-carrinho">CARRINHO (0)</a>
             </div>
-            
-            <div class="search-container">
-                <input type="text" placeholder="Pesquisar obras ou autores..." id="search-input">
-                <i class="fas fa-search search-icon"></i>
+
+            <a href="index.html" class="brand" style="text-decoration: none;">
+                <span class="logo-destaque">V</span><span class="logo-texto">aluta</span>
+                <span class="subtitle">Bookstore</span>
+            </a>
+
+            <div class="nav-icons-right">
+                <a href="carrinho.html" class="cart-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="badge" id="contagem-carrinho">0</span>
+                </a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="carrinho-layout">
-        <div id="lista-itens-carrinho"></div>
+    <main class="container">
+        <div class="section-header" style="margin-top: 40px;">
+            <h2>Seu Carrinho</h2>
+            <div class="decorative-line"></div>
+        </div>
 
-        <section class="carrinho-fechamento">
-            <span class="label-preco-final">Preço Final</span>
-            <span id="preco-total-carrinho">R$ 0,00</span>
-            
-            <button id="btn-finalizar" class="btn-comprar-grande">Finalizar Compra</button>
-            
-            <a href="index.html" class="link-voltar-shopping">+ Continuar Explorando Acervo</a>
+        <section class="carrinho-layout">
+            <div id="lista-itens-carrinho">
+                <!-- Itens injetados pelo produto.js -->
+            </div>
+
+            <section class="carrinho-fechamento">
+                <span class="label-preco-final">Total do Pedido</span>
+                <span id="preco-total-carrinho">R$ 0,00</span>
+                
+                <button id="btn-finalizar" class="btn-finalizar-compra">Finalizar Compra</button>
+                
+                <a href="index.html" class="link-voltar-shopping">
+                    <i class="fas fa-arrow-left" style="font-size: 0.6rem; margin-right: 5px;"></i> 
+                    Continuar Explorando o Acervo
+                </a>
+            </section>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
+    <!-- FOOTER PADRONIZADO -->
+    <footer class="main-footer">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
                 <div class="footer-item">
-                    <i class="fab fa-instagram"></i>
+                    <i class="fa-brands fa-instagram"></i> 
                     <span>@Valutabookstoreoficial</span>
                 </div>
-                
                 <div class="footer-item">
-                    <i class="fas fa-envelope"></i>
+                    <i class="fa-solid fa-envelope"></i> 
                     <span>contato@valutabookstore.com</span>
                 </div>
-                
                 <div class="footer-item">
-                    <i class="fas fa-phone"></i>
+                    <i class="fa-solid fa-phone"></i> 
                     <span>(xx) 99899-218X</span>
                 </div>
             </div>
             
-            <div class="footer-line"></div>
+            <div style="width: 100%; height: 1px; background: #333; opacity: 0.3; margin-bottom: 20px;"></div>
             
-            <div class="footer-bottom">
+            <div class="footer-bottom" style="text-align: center;">
                 <p>Valuta Bookstore &copy; 2026</p>
-                <p class="dev-credito">Desenvolvido por <strong>Caique Soares</strong> - ADS</p>
+                <p style="font-size: 0.7rem; color: #777; margin-top: 10px; letter-spacing: 1px;">
+                    Desenvolvido por <strong>Caique Soares</strong> - ADS
+                </p>
             </div>
         </div>
     </footer>
