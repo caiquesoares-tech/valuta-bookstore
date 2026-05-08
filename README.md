@@ -71,23 +71,6 @@ O site está sendo continuamente ajustado para funcionar melhor em:
 * API própria
 * Dashboard administrativo
 
----
-
-## 📂 Estrutura do Projeto
-
-```bash
-valuta-bookstore/
-│
-├── index.html
-├── assets/
-├── css/
-├── js/
-├── images/
-└── README.md
-```
-
----
-
 ## 💡 Aprendizados
 
 Durante o desenvolvimento deste projeto estou aprendendo e aprimorando:
@@ -102,17 +85,17 @@ Durante o desenvolvimento deste projeto estou aprendendo e aprimorando:
 
 ---
 
-## 📸 Preview
-
-Adicione screenshots do projeto aqui futuramente.
-
-Exemplo:
+## 📸 Atributos do site 
 
 * Home Page
 * Cards de livros
 * Responsividade mobile
 * Navbar
 * Footer
+* Navegador de livros por nomes 
+* Sistema de compra e carrinhos 
+* Calculadora integrada 
+  
 
 ---
 
