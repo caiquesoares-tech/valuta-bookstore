@@ -28,7 +28,7 @@ body {
     padding: 0 20px; 
 }
 
-/* FIX CRÍTICO: Forçar carregamento dos ícones */
+/* FIX ÍCONES */
 .fas, .fa-solid, .fa-search, .fa-shopping-bag, .fa-shopping-cart, i {
     font-family: "Font Awesome 6 Free" !important;
     font-weight: 900 !important;
@@ -37,10 +37,10 @@ body {
 }
 
 /* =========================================
-   2. HEADER (LOGO E ÍCONES)
+   2. HEADER (NAVBAR E BUSCA)
    ========================================= */
 .main-header { 
-    padding: 25px 0; 
+    padding: 20px 0; 
     border-bottom: 1px solid #eee; 
     background: #fff; 
     position: sticky;
@@ -71,16 +71,22 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
-.nav-icons-right i {
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: var(--transition);
+/* Estilo do campo de busca movido do HTML para cá */
+.search-box input {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    outline: none;
+    transition: width 0.3s;
+    width: 140px;
 }
 
-.nav-icons-right i:hover { color: var(--accent); }
+.search-box input:focus { width: 180px; border-color: var(--accent); }
 
 .cart-link { position: relative; text-decoration: none; color: inherit; }
 .badge {
@@ -90,7 +96,7 @@ body {
     background: var(--accent);
     color: white;
     font-size: 0.65rem;
-    padding: 2px 5px;
+    padding: 2px 6px;
     border-radius: 50%;
 }
 
@@ -102,6 +108,8 @@ body {
 
 .slide {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -120,18 +128,7 @@ body {
 .slide-title { font-family: 'Cinzel', serif; font-size: 3.5rem; margin: 15px 0; }
 .slide-description { font-family: 'Lora', serif; font-size: 1.1rem; color: #555; margin-bottom: 30px; font-style: italic; max-width: 500px; }
 
-.btn-slide { 
-    background: var(--primary); 
-    color: #fff; 
-    padding: 14px 35px; 
-    text-decoration: none; 
-    font-weight: 700; 
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-
-/* Controles do Slider */
+/* Controles */
 .prev-slide, .next-slide {
     position: absolute;
     top: 50%;
@@ -142,7 +139,9 @@ body {
     font-size: 2rem;
     cursor: pointer;
     z-index: 10;
+    transition: 0.3s;
 }
+.prev-slide:hover, .next-slide:hover { color: var(--primary); }
 .prev-slide { left: 20px; }
 .next-slide { right: 20px; }
 
@@ -176,13 +175,7 @@ body {
 .card-livro img { width: 100%; height: 300px; object-fit: contain; margin-bottom: 20px; }
 .card-livro h3 { font-size: 1.1rem; margin-bottom: 10px; font-family: 'Cinzel', serif; }
 
-/* CONTAINER DOS BOTÕES LADO A LADO */
-.botoes-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    padding: 0 10px;
-}
+.botoes-container { display: flex; gap: 10px; margin-top: 20px; padding: 0 10px; }
 
 .btn-comprar {
     flex: 3;
@@ -193,7 +186,6 @@ body {
     font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
     border: none;
     cursor: pointer;
     transition: var(--transition);
@@ -208,7 +200,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
     transition: var(--transition);
 }
 
@@ -216,68 +207,60 @@ body {
 .btn-add-carrinho:hover { border-color: var(--accent); color: var(--accent); }
 
 /* =========================================
-   5. FOOTER E RESPONSIVIDADE (OTIMIZADA)
+   5. FOOTER
    ========================================= */
 .main-footer { background: #111; color: #fff; padding: 40px 0; text-align: center; font-size: 0.8rem; }
+.footer-item { display: flex; align-items: center; gap: 10px; }
 
+/* =========================================
+   6. RESPONSIVIDADE (MOBILE FIX)
+   ========================================= */
 @media (max-width: 768px) {
-    /* Navbar */
-    .navbar { 
-        grid-template-columns: 1fr auto; 
-        padding: 0 15px;
-    }
-    .nav-links-left { display: none; }
+    .navbar { grid-template-columns: 1fr auto; padding: 0 15px; }
+    .nav-links-left, .search-box { display: none; } /* Oculta busca no mobile para limpar o topo */
     .brand { text-align: left; }
-    .logo-destaque { font-size: 1.8rem; }
-    .logo-texto { font-size: 1.2rem; }
     
-    /* Hero / Slide */
-    .hero-slider-section { height: auto; padding: 40px 0; }
-    .slide { position: relative; opacity: 1; visibility: visible; display: block; }
+    /* FIX CARROSSEL MOBILE */
+    .hero-slider-section { height: 480px; padding: 20px 0; }
+    
+    .slide { 
+        position: absolute; /* Crucial para não empilhar verticalmente */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .slide:not(.active) { opacity: 0; visibility: hidden; }
+
     .slide-content { 
         flex-direction: column; 
         text-align: center; 
-        gap: 30px;
-        padding: 0 20px;
+        gap: 15px;
+        padding: 20px;
     }
+
     .slide-image img { 
-        height: auto; 
-        max-width: 220px; /* Evita que a capa fique gigante no mobile */
+        height: 220px; 
+        max-width: 160px;
         margin: 0 auto;
     }
-    .slide-title { font-size: 2.2rem; line-height: 1.1; }
-    .slide-description { font-size: 1rem; margin: 0 auto 20px; }
+
+    .slide-title { font-size: 2rem; }
+    .slide-description { display: none; } /* Esconde descrição no mobile para focar no título e imagem */
     
+    .prev-slide, .next-slide { font-size: 1.5rem; }
+
     /* Grid de Livros */
     .livros-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Dois livros por linha em telas médias */
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 30px;
         padding: 0 15px 60px;
     }
-    .card-livro img { height: 220px; }
-    .card-livro h4 { font-size: 0.9rem; }
-
-    /* Botões na Vitrine */
-    .botoes-container { flex-direction: column; gap: 8px; }
-    .btn-comprar { width: 100%; padding: 10px; }
-
-    /* Seção do Autor (Página de Produto) */
-    .autor-container {
-        flex-direction: column !important;
-        align-items: center;
-        text-align: center;
-        padding: 20px !important;
-    }
-    .autor-foto-wrapper img {
-        width: 120px !important;
-        height: 120px !important;
-    }
+    .card-livro img { height: 200px; }
+    .botoes-container { flex-direction: column; }
 }
 
-/* Ajuste para celulares muito pequenos (iPhone SE, etc) */
 @media (max-width: 480px) {
-    .livros-grid {
-        grid-template-columns: 1fr; /* Um livro por linha em telas muito estreitas */
-    }
-    .slide-title { font-size: 1.8rem; }
+    .livros-grid { grid-template-columns: 1fr; }
+    .hero-slider-section { height: 420px; }
+    .slide-title { font-size: 1.6rem; }
 }

@@ -1,5 +1,5 @@
 /* ============================================================
-   PRODUTO.JS - VALUTA LIVRARIA (VERSÃO INTEGRAL FINAL)
+   PRODUTO.JS - VALUTA LIVRARIA (VERSÃO INTEGRAL ATUALIZADA)
    ============================================================ */
 
 // 1. BANCO DE DADOS INTEGRADO (DADOS ORIGINAIS PRESERVADOS)
@@ -17,13 +17,23 @@ const livros = [
 ];
 
 /* ============================================================
-   2. FUNÇÕES DE RENDERIZAÇÃO
+   2. FUNÇÕES DE INICIALIZAÇÃO E RENDERIZAÇÃO
    ============================================================ */
 
 function inicializarPagina() {
     atualizarContadorMenu();
-    if (document.getElementById('detalhe-titulo')) carregarDadosDoProduto();
-    if (document.getElementById('lista-itens-carrinho')) renderizarCarrinho();
+    
+    // Verifica se estamos na página de detalhes
+    if (document.getElementById('detalhe-titulo')) {
+        carregarDadosDoProduto();
+    }
+    
+    // Verifica se estamos na página do carrinho
+    if (document.getElementById('lista-itens-carrinho')) {
+        renderizarCarrinho();
+    }
+    
+    // Verifica se estamos na index (vitrine)
     if (document.getElementById('vitrine-livros')) {
         renderizarVitrine();
         configurarPesquisa();
@@ -36,17 +46,25 @@ function carregarDadosDoProduto() {
     const livro = livros.find(l => Number(l.id) === Number(idUrl));
 
     if (livro) {
-        document.getElementById('detalhe-titulo').innerText = livro.titulo;
-        document.getElementById('detalhe-autor').innerText = livro.autor;
-        document.getElementById('detalhe-imagem').src = livro.imagem;
-        document.getElementById('detalhe-preco').innerText = `R$ ${livro.preco}`;
-        document.getElementById('detalhe-sinopse').innerText = livro.sinopse;
+        const elementos = {
+            'detalhe-titulo': livro.titulo,
+            'detalhe-autor': livro.autor,
+            'detalhe-preco': `R$ ${livro.preco}`,
+            'detalhe-sinopse': livro.sinopse,
+            'autor-nome-info': livro.autor,
+            'autor-bio': livro.bio
+        };
 
-        document.getElementById('autor-nome-info').innerText = livro.autor;
-        document.getElementById('autor-bio').innerText = livro.bio;
-        
+        for (let id in elementos) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = elementos[id];
+        }
+
+        const imgProduto = document.getElementById('detalhe-image'); // Ajuste de ID comum
+        if (imgProduto) imgProduto.src = livro.imagem;
+
         const fotoAutor = document.getElementById('autor-foto');
-        if (fotoAutor) { fotoAutor.src = livro.foto; }
+        if (fotoAutor) fotoAutor.src = livro.foto;
 
         const btnCompra = document.querySelector('.btn-comprar-grande');
         if (btnCompra) {
@@ -57,27 +75,27 @@ function carregarDadosDoProduto() {
 
 function renderizarVitrine(listaParaExibir = livros) {
     const vitrine = document.getElementById('vitrine-livros');
-    if (vitrine) {
-        vitrine.innerHTML = "";
-        listaParaExibir.forEach(l => {
-            vitrine.innerHTML += `
-                <article class="card-livro">
-                    <img src="${l.imagem}" alt="${l.titulo}">
-                    <h3>${l.titulo}</h3>
-                    <p class="preco">R$ ${l.preco}</p>
-                    <div class="botoes-container">
-                        <a href="produto.html?id=${l.id}" class="btn-comprar">COMPRAR</a>
-                        <button class="btn-add-carrinho" onclick="adicionarAoCarrinho(${l.id})">
-                            <i class="fas fa-shopping-cart"></i>
-                        </button>
-                    </div>
-                </article>`;
-        });
-    }
+    if (!vitrine) return;
+
+    vitrine.innerHTML = "";
+    listaParaExibir.forEach(l => {
+        vitrine.innerHTML += `
+            <article class="card-livro">
+                <img src="${l.imagem}" alt="${l.titulo}">
+                <h3>${l.titulo}</h3>
+                <p class="preco">R$ ${l.preco}</p>
+                <div class="botoes-container">
+                    <a href="produto.html?id=${l.id}" class="btn-comprar">COMPRAR</a>
+                    <button class="btn-add-carrinho" onclick="adicionarAoCarrinho(${l.id})" aria-label="Adicionar ao carrinho">
+                        <i class="fas fa-shopping-bag"></i>
+                    </button>
+                </div>
+            </article>`;
+    });
 }
 
 /* ============================================================
-   3. SISTEMA DE PESQUISA (NOVO)
+   3. SISTEMA DE PESQUISA
    ============================================================ */
 
 function configurarPesquisa() {
@@ -95,7 +113,7 @@ function configurarPesquisa() {
 }
 
 /* ============================================================
-   4. SISTEMA DE CARRINHO
+   4. LÓGICA DO CARRINHO (LOCALSTORAGE)
    ============================================================ */
 
 function adicionarAoCarrinho(id) {
@@ -117,10 +135,15 @@ function renderizarCarrinho() {
     if (lista) {
         lista.innerHTML = "";
         let somaTotal = 0;
+        
+        if (carrinho.length === 0) {
+            lista.innerHTML = "<p style='text-align:center; padding: 20px;'>Seu carrinho está vazio.</p>";
+        }
+
         carrinho.forEach((item, index) => {
             lista.innerHTML += `
                 <div class="item-carrinho">
-                    <img src="${item.imagem}" alt="${item.titulo}" style="width: 50px;">
+                    <img src="${item.imagem}" alt="${item.titulo}" style="width: 60px; height: 90px; object-fit: cover; border-radius: 4px;">
                     <div class="item-info">
                         <h4>${item.titulo}</h4>
                         <p>R$ ${item.preco}</p>
@@ -129,7 +152,10 @@ function renderizarCarrinho() {
                 </div>`;
             somaTotal += parseFloat(item.preco.replace(',', '.'));
         });
-        if (totalElemento) totalElemento.innerText = `R$ ${somaTotal.toFixed(2).replace('.', ',')}`;
+        
+        if (totalElemento) {
+            totalElemento.innerText = `R$ ${somaTotal.toFixed(2).replace('.', ',')}`;
+        }
     }
 }
 
@@ -150,4 +176,5 @@ function atualizarContadorMenu() {
     }
 }
 
+// Executa ao carregar o DOM
 document.addEventListener('DOMContentLoaded', inicializarPagina);

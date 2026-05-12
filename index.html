@@ -25,15 +25,13 @@
             </div>
 
             <!-- Coluna Direita: Pesquisa e Carrinho -->
-            <div class="nav-icons-right" style="display: flex; align-items: center; gap: 15px;">
-                <!-- Campo de Pesquisa adicionado para funcionalidade -->
-                <div class="search-box" style="position: relative; display: flex; align-items: center;">
-                    <input type="text" id="search-input" placeholder="Buscar obra..." 
-                           style="padding: 6px 12px; border: 1px solid #ddd; border-radius: 20px; font-family: 'Inter', sans-serif; font-size: 0.75rem; outline: none; transition: width 0.3s; width: 150px;">
-                    <i class="fas fa-search" style="margin-left: -25px; color: #999; font-size: 0.8rem;"></i>
+            <div class="nav-icons-right">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Buscar obra...">
+                    <i class="fas fa-search"></i>
                 </div>
 
-                <a href="carrinho.html" class="cart-link" style="position: relative;">
+                <a href="carrinho.html" class="cart-link">
                     <i class="fas fa-shopping-bag"></i>
                     <span id="contagem-carrinho" class="badge">0</span>
                 </a>
@@ -48,7 +46,7 @@
             <div class="slide active">
                 <div class="container slide-content">
                     <div class="slide-image">
-                        <img src="a-iliada.jpg" alt="Livro Destaque 1"> 
+                        <img src="a-iliada.jpg" alt="A Ilíada"> 
                     </div>
                     <div class="slide-text">
                         <span class="slide-tag">GRANDES OBRAS</span>
@@ -62,12 +60,12 @@
             <div class="slide">
                 <div class="container slide-content">
                     <div class="slide-image">
-                        <img src="crime-e-castigo.webp" alt="crime-e-castigo">
+                        <img src="crime-e-castigo.webp" alt="Crime e Castigo">
                     </div>
                     <div class="slide-text">
                         <span class="slide-tag">ROMANCE</span>
                         <h2 class="slide-title">Crime e Castigo</h2>
-                        <p class="slide-description">"Crime e Castigo", de Fiódor Dostoiévski, foi publicado originalmente em 1866 na revista O Mensageiro Russo. A obra, marco do realismo, narra a história do estudante Raskólnikov em São Petersburgo, que comete um duplo assassinato motivado por teorias de superioridade moral e miséria, enfrentando intensa culpa..</p>
+                        <p class="slide-description">Um marco do realismo que narra a história do estudante Raskólnikov enfrentando a culpa por seus atos em São Petersburgo.</p>
                     </div>
                 </div>
             </div>
@@ -76,19 +74,19 @@
             <div class="slide">
                 <div class="container slide-content">
                     <div class="slide-image">
-                        <img src="o-anticristo.jpg" alt="o-anticristo">
+                        <img src="o-anticristo.jpg" alt="O Anticristo">
                     </div>
                     <div class="slide-text">
                         <span class="slide-tag">FILOSOFIA</span>
-                        <h2 class="slide-title">O anticristo</h2>
-                        <p class="slide-description">O livro "O Anticristo" (Der Antichrist em alemão), escrito pelo filósofo alemão Friedrich Nietzsche, possui uma história de produção e lançamento marcada pela doença mental do autor e intervenções editoriais..</p>
+                        <h2 class="slide-title">O Anticristo</h2>
+                        <p class="slide-description">Uma das obras mais polêmicas de Friedrich Nietzsche, onde o filósofo apresenta sua crítica contundente aos valores estabelecidos.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Controles -->
-            <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-            <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+            <button class="prev-slide" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-slide" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
             
             <div class="slider-dots">
                 <span class="dot active"></span>
@@ -106,7 +104,6 @@
         <section id="vitrine-livros" class="livros-grid"></section>
     </main>
 
-    <!-- FOOTER PADRONIZADO -->
     <footer class="main-footer">
         <div class="container">
             <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
@@ -126,7 +123,7 @@
             
             <div style="width: 100%; height: 1px; background: #333; opacity: 0.3; margin-bottom: 20px;"></div>
             
-            <div class="footer-bottom" style="text-align: center;">
+            <div class="footer-bottom">
                 <p>Valuta Bookstore &copy; 2026</p>
                 <p style="font-size: 0.7rem; color: #777; margin-top: 10px; letter-spacing: 1px;">
                     Desenvolvido por <strong>Caique Soares</strong> - ADS
@@ -159,7 +156,8 @@
             dot.addEventListener('click', () => update(idx));
         });
 
-        setInterval(() => update(current + 1), 8000);
+        // Autoplay a cada 5 segundos
+        setInterval(() => update(current + 1), 5000);
     </script>
     <script src="produto.js"></script>
 </body>
