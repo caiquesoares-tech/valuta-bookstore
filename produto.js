@@ -60,11 +60,18 @@ function carregarDadosDoProduto() {
             if (el) el.innerText = elementos[id];
         }
 
-        const imgProduto = document.getElementById('detalhe-image'); // Ajuste de ID comum
-        if (imgProduto) imgProduto.src = livro.imagem;
+        // AJUSTE: O ID correto para exibir a capa na página de compra é 'detalhe-imagem'
+        const imgProduto = document.getElementById('detalhe-imagem'); 
+        if (imgProduto) {
+            imgProduto.src = livro.imagem;
+            imgProduto.alt = livro.titulo;
+        }
 
         const fotoAutor = document.getElementById('autor-foto');
-        if (fotoAutor) fotoAutor.src = livro.foto;
+        if (fotoAutor) {
+            fotoAutor.src = livro.foto;
+            fotoAutor.alt = `Foto de ${livro.autor}`;
+        }
 
         const btnCompra = document.querySelector('.btn-comprar-grande');
         if (btnCompra) {
