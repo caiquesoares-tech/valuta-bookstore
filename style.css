@@ -4,8 +4,8 @@
 :root {
     --primary: #121212;
     --accent: #b88b5d;
-    --white: #ffffff;
-    --bg-light: #f4f4f4;
+    --white: #e8e2d6; /* 20% mais escuro - Tom de papel aconchegante */
+    --bg-light: #dcd4c5; /* Tom de contraste para seções e slider */
     --transition: all 0.4s ease;
 }
 
@@ -41,8 +41,8 @@ body {
    ========================================= */
 .main-header { 
     padding: 20px 0; 
-    border-bottom: 1px solid #eee; 
-    background: #fff; 
+    border-bottom: 1px solid rgba(0,0,0,0.08); 
+    background: var(--white); 
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -74,11 +74,11 @@ body {
     gap: 20px;
 }
 
-/* Estilo do campo de busca movido do HTML para cá */
 .search-box input {
     padding: 6px 12px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0,0,0,0.15);
     border-radius: 20px;
+    background: rgba(0,0,0,0.04);
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     outline: none;
@@ -101,7 +101,7 @@ body {
 }
 
 /* =========================================
-   3. HERO SLIDER (BANNER PRINCIPAL)
+   3. HERO SLIDER (TRANSIÇÃO SUTIL ATUALIZADA)
    ========================================= */
 .hero-slider-section { position: relative; height: 550px; background: var(--bg-light); overflow: hidden; }
 .slider-container { width: 100%; height: 100%; position: relative; }
@@ -114,19 +114,28 @@ body {
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.6s ease;
+    transition: opacity 1s ease-in-out, visibility 1s; 
     display: flex;
     align-items: center;
 }
 
 .slide.active { opacity: 1; visibility: visible; }
 
+.slide.active .slide-text {
+    animation: fadeInLento 1.5s ease-out;
+}
+
+@keyframes fadeInLento {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .slide-content { display: flex; align-items: center; justify-content: space-around; gap: 50px; width: 100%; }
-.slide-image img { height: 420px; box-shadow: 20px 20px 40px rgba(0,0,0,0.1); border-radius: 4px; }
+.slide-image img { height: 420px; box-shadow: 20px 20px 40px rgba(0,0,0,0.12); border-radius: 4px; }
 
 .slide-tag { color: var(--accent); font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; }
 .slide-title { font-family: 'Cinzel', serif; font-size: 3.5rem; margin: 15px 0; }
-.slide-description { font-family: 'Lora', serif; font-size: 1.1rem; color: #555; margin-bottom: 30px; font-style: italic; max-width: 500px; }
+.slide-description { font-family: 'Lora', serif; font-size: 1.1rem; color: #333; margin-bottom: 30px; font-style: italic; max-width: 500px; line-height: 1.6; }
 
 /* Controles */
 .prev-slide, .next-slide {
@@ -155,7 +164,7 @@ body {
     z-index: 10;
 }
 
-.dot { width: 12px; height: 12px; background: #bbb; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.dot { width: 12px; height: 12px; background: #aaa; border-radius: 50%; cursor: pointer; transition: 0.3s; }
 .dot.active { background: var(--accent); width: 35px; border-radius: 10px; }
 
 /* =========================================
@@ -195,7 +204,7 @@ body {
     flex: 1;
     background: transparent;
     color: var(--primary);
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0,0,0,0.15);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -207,9 +216,36 @@ body {
 .btn-add-carrinho:hover { border-color: var(--accent); color: var(--accent); }
 
 /* =========================================
+   ESTILO DO BOTÃO NA PÁGINA DE PRODUTO
+   ========================================= */
+.btn-comprar-grande {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 15px 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-comprar-grande:hover {
+    background-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.btn-comprar-grande i {
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+/* =========================================
    5. FOOTER
    ========================================= */
-.main-footer { background: #111; color: #fff; padding: 40px 0; text-align: center; font-size: 0.8rem; }
+.main-footer { background: #080808; color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 0.8rem; }
 .footer-item { display: flex; align-items: center; gap: 10px; }
 
 /* =========================================
@@ -217,14 +253,13 @@ body {
    ========================================= */
 @media (max-width: 768px) {
     .navbar { grid-template-columns: 1fr auto; padding: 0 15px; }
-    .nav-links-left, .search-box { display: none; } /* Oculta busca no mobile para limpar o topo */
+    .nav-links-left, .search-box { display: none; } 
     .brand { text-align: left; }
     
-    /* FIX CARROSSEL MOBILE */
     .hero-slider-section { height: 480px; padding: 20px 0; }
     
     .slide { 
-        position: absolute; /* Crucial para não empilhar verticalmente */
+        position: absolute;
         display: flex;
         flex-direction: column;
     }
@@ -245,11 +280,10 @@ body {
     }
 
     .slide-title { font-size: 2rem; }
-    .slide-description { display: none; } /* Esconde descrição no mobile para focar no título e imagem */
+    .slide-description { display: none; } 
     
     .prev-slide, .next-slide { font-size: 1.5rem; }
 
-    /* Grid de Livros */
     .livros-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 30px;

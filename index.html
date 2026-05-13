@@ -13,18 +13,15 @@
 
     <header class="main-header">
         <nav class="navbar container">
-            <!-- Coluna Esquerda: Navegação -->
             <div class="nav-links-left">
                 <a href="index.html">INÍCIO</a>
             </div>
 
-            <!-- Coluna Central: Logo -->
             <div class="brand">
                 <h1 class="logo"><span class="logo-destaque">V</span><span class="logo-texto">aluta</span></h1>
                 <span class="subtitle">Bookstore</span>
             </div>
 
-            <!-- Coluna Direita: Pesquisa e Carrinho -->
             <div class="nav-icons-right">
                 <div class="search-box">
                     <input type="text" id="search-input" placeholder="Buscar obra...">
@@ -46,12 +43,12 @@
             <div class="slide active">
                 <div class="container slide-content">
                     <div class="slide-image">
-                        <img src="a-iliada.jpg" alt="A Ilíada"> 
+                        <img src="nietzsche.webp" alt="Friedrich Nietzsche"> 
                     </div>
                     <div class="slide-text">
-                        <span class="slide-tag">GRANDES OBRAS</span>
-                        <h2 class="slide-title">A Ilíada</h2>
-                        <p class="slide-description">A Ilíada, atribuída a Homero, é um poema épico fundador da literatura ocidental. Narra a "ira de Aquiles" e os eventos decisivos da Guerra de Troia.</p>
+                        <span class="slide-tag">GRANDES AUTORES</span>
+                        <h2 class="slide-title">Friedrich Nietzsche</h2>
+                        <p class="slide-description">"Friedrich Nietzsche (1844-1900) foi um influente filósofo, filólogo e poeta alemão, conhecido por sua crítica radical à moral cristã, à metafísica ocidental e ao niilismo. Sua obra utiliza aforismos e metáforas para questionar valores tradicionais, introduzindo conceitos como "vontade de poder", "eterno retorno" e o "além-do-homem" (Übermensch).</p>
                     </div>
                 </div>
             </div>
@@ -60,12 +57,12 @@
             <div class="slide">
                 <div class="container slide-content">
                     <div class="slide-image">
-                        <img src="crime-e-castigo.webp" alt="Crime e Castigo">
+                        <img src="dostoievski.jpg" alt="Fiódor Dostoiévski">
                     </div>
                     <div class="slide-text">
-                        <span class="slide-tag">ROMANCE</span>
-                        <h2 class="slide-title">Crime e Castigo</h2>
-                        <p class="slide-description">Um marco do realismo que narra a história do estudante Raskólnikov enfrentando a culpa por seus atos em São Petersburgo.</p>
+                        <span class="slide-tag">GRANDES AUTORES</span>
+                        <h2 class="slide-title"> Fiódor Dostoiévski</h2>
+                        <p class="slide-description">Fiódor Dostoiévski (1821-1881) foi um dos maiores romancistas e pensadores russos, célebre por explorar a psicologia humana em obras como Crime e Castigo e Os Irmãos Karamazov. Sua vida foi marcada por tragédias, incluindo uma falsa execução, anos de trabalhos forçados na Sibéria e epilepsia, experiências que moldaram sua literatura realista, existencialista e profunda sobre a alma.</p>
                     </div>
                 </div>
             </div>
@@ -74,12 +71,12 @@
             <div class="slide">
                 <div class="container slide-content">
                     <div class="slide-image">
-                        <img src="o-anticristo.jpg" alt="O Anticristo">
+                        <img src="kafka.jpg" alt="Franz Kafka">
                     </div>
                     <div class="slide-text">
-                        <span class="slide-tag">FILOSOFIA</span>
-                        <h2 class="slide-title">O Anticristo</h2>
-                        <p class="slide-description">Uma das obras mais polêmicas de Friedrich Nietzsche, onde o filósofo apresenta sua crítica contundente aos valores estabelecidos.</p>
+                        <span class="slide-tag">GRANDES AUTORES</span>
+                        <h2 class="slide-title">Franz Kafka</h2>
+                        <p class="slide-description">Franz Kafka (1883–1924) foi um influente escritor tcheco de língua alemã, figura central do modernismo e do expressionismo. Nascido em Praga, sua obra explora temas como alienação, ansiedade, burocracia e relações familiares, marcadas pelo absurdo e descritas pelo adjetivo "kafkiano". Trabalhou como funcionário de seguros e faleceu de tuberculose aos 40 anos, deixando a maior parte de sua obra publicada postumamente.</p>
                     </div>
                 </div>
             </div>
@@ -98,7 +95,7 @@
 
     <main class="container">
         <div class="section-header">
-            <h2>Acervo Completo</h2>
+            <h2>Acervo Completo de Obras</h2>
             <div class="decorative-line"></div>
         </div>
         <section id="vitrine-livros" class="livros-grid"></section>
@@ -132,33 +129,8 @@
         </div>
     </footer>
 
-    <script>
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        let current = 0;
-
-        function update(index) {
-            if(index >= slides.length) current = 0;
-            else if(index < 0) current = slides.length - 1;
-            else current = index;
-
-            slides.forEach(s => s.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
-            
-            slides[current].classList.add('active');
-            dots[current].classList.add('active');
-        }
-
-        document.querySelector('.next-slide').onclick = () => update(current + 1);
-        document.querySelector('.prev-slide').onclick = () => update(current - 1);
-        
-        dots.forEach((dot, idx) => {
-            dot.addEventListener('click', () => update(idx));
-        });
-
-        // Autoplay a cada 5 segundos
-        setInterval(() => update(current + 1), 5000);
-    </script>
+    <!-- Scripts: A ordem aqui é fundamental -->
     <script src="produto.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
