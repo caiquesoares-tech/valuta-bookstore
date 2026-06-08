@@ -11,18 +11,17 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.5">
 </head>
-<body>
+<body class="pagina-produto">
 
-    <!-- HEADER PADRONIZADO COM A HOME -->
     <header class="main-header">
         <div class="container navbar">
             <div class="nav-links-left">
                 <a href="index.html">Início</a>
             </div>
 
-            <a href="index.html" class="brand" style="text-decoration: none;">
+            <a href="index.html" class="brand">
                 <span class="logo-destaque">V</span><span class="logo-texto">aluta</span>
                 <span class="subtitle">Bookstore</span>
             </a>
@@ -37,75 +36,84 @@
     </header>
 
     <main class="container">
-        <!-- ÁREA DO PRODUTO REESTILIZADA -->
-        <div class="hero-slider-section" style="background: #fff; height: auto; padding: 60px 0; display: block;">
-            <div class="slide-content" style="opacity: 1; visibility: visible; position: relative;">
-                
-                <div class="slide-image">
-                    <img id="detalhe-imagem" src="" alt="" style="max-height: 500px;">
+        <section class="produto-detalhe-section">
+            <div class="produto-container">
+                <div class="produto-imagem-foco">
+                    <img id="detalhe-imagem" src="" alt="Capa do Livro">
                 </div>
 
-                <div class="slide-text">
+                <div class="produto-info-foco">
                     <span class="slide-tag">EDIÇÃO COLECIONADOR</span>
-                    <h1 id="detalhe-titulo" class="slide-title" style="margin-bottom: 5px;"></h1>
-                    <p class="produto-autor" style="font-family: 'Lora'; font-style: italic; color: #b88b5d; margin-bottom: 20px;">
+                    <h1 id="detalhe-titulo" class="detalhe-titulo-principal"></h1>
+                    
+                    <p class="produto-autor-link">
                         Por <span id="detalhe-autor"></span>
                     </p>
                     
-                    <p id="detalhe-sinopse" class="slide-description"></p>
+                    <div class="descricao-area">
+                        <p id="detalhe-sinopse" class="sinopse-texto"></p>
+                    </div>
                     
-                    <div class="compra-area" style="margin-top: 30px; display: flex; align-items: center; gap: 30px;">
-                        <span class="preco-grande" id="detalhe-preco" style="font-size: 2rem; font-family: 'Cinzel'; font-weight: 700;"></span> 
+                    <div class="compra-acao-area">
+                        <div class="preco-container">
+                            <span class="label-preco">valor</span>
+                            <span class="preco-grande" id="detalhe-preco"></span> 
+                        </div>
                         
-                        <!-- BOTÃO ATUALIZADO COM ÍCONE DA INDEX -->
-                        <button class="btn-slide btn-comprar-grande" style="border: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 15px 30px;">
+                        <button id="btn-add-detalhe" class="btn-comprar-grande">
                             ADICIONAR AO CARRINHO
                             <i class="fas fa-shopping-bag"></i>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- SEÇÃO DO AUTOR COM DESIGN PREMIUM -->
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
-        
-        <section class="secao-autor" style="padding-bottom: 80px;">
-            <div class="autor-container" style="display: flex; gap: 40px; align-items: flex-start; background: #f9f9f9; padding: 40px; border-radius: 4px;">
-                <div class="autor-foto-wrapper" style="flex-shrink: 0;">
-                    <img id="autor-foto" src="" alt="Foto do Autor" style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 3px solid #b88b5d;">
+        <section class="secao-autor-premium">
+            <div class="container">
+                <div class="autor-card">
+                    <div class="autor-foto-column">
+                        <img id="autor-foto" src="" alt="Foto do Autor">
+                    </div>
+                    <div class="autor-texto-column">
+                        <h3 class="autor-label">SOBRE O AUTOR</h3>
+                        <h4 id="autor-nome-info" class="autor-nome-titulo"></h4>
+                        <p id="autor-bio" class="autor-biografia"></p>
+                    </div>
                 </div>
-                <div class="autor-detalhes">
-                    <h3 style="font-family: 'Cinzel'; color: #b88b5d; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px;">SOBRE O AUTOR</h3>
-                    <h4 id="autor-nome-info" style="font-family: 'Cinzel'; font-size: 1.8rem; margin-bottom: 15px;"></h4>
-                    <p id="autor-bio" style="font-family: 'Lora'; line-height: 1.8; color: #555; font-style: italic;"></p>
-                </div>
+            </div>
+        </section>
+
+        <section class="container recomendacoes-section">
+            <div class="section-header">
+                <h2>Outras Obras que Podem lhe Interessar</h2>
+                <div class="decorative-line"></div>
+            </div>
+            
+            <div class="carrossel-wrapper" style="position: relative;">
+                <button class="arrow-btn prev" onclick="scrollManual(-1)">&#10094;</button>
+                <div id="vitrine-recomendacoes" class="livros-grid-carrossel"></div>
+                <button class="arrow-btn next" onclick="scrollManual(1)">&#10095;</button>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER PADRONIZADO -->
     <footer class="main-footer">
         <div class="container">
-            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
-                <div><i class="fab fa-instagram"></i> @Valutabookstoreoficial</div>
-                <div><i class="fas fa-envelope"></i> contato@valutabookstore.com</div>
-                <div><i class="fas fa-phone"></i> (xx) 99899-218X</div>
+            <div class="footer-links-wrapper">
+                <div class="footer-item"><i class="fa-brands fa-instagram"></i> <span>@Valutabookstoreoficial</span></div>
+                <div class="footer-item"><i class="fa-solid fa-envelope"></i> <span>contato@valutabookstore.com</span></div>
+                <div class="footer-item"><i class="fa-solid fa-phone"></i> <span>(xx) 99899-218X</span></div>
             </div>
-            
-            <div style="width: 100%; height: 1px; background: #333; margin-bottom: 20px;"></div>
-            
+            <div class="footer-divisor"></div>
             <div class="footer-bottom">
                 <p>Valuta Bookstore &copy; 2026</p>
-                <p style="font-size: 0.7rem; color: #777; margin-top: 10px;">
-                    Desenvolvido por <strong>Caique Soares</strong> - ADS
-                </p>
+                <p class="footer-credito">Desenvolvido por <strong>Caique Soares</strong> - ADS</p>
             </div>
         </div>
     </footer>
 
-    <!-- Carregamento dos scripts na ordem correta -->
-    <script src="produto.js"></script>
     <script src="script.js"></script>
+    <script src="produto.js"></script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 /* ============================================================
-   SCRIPT.JS - LÓGICA DE FUNCIONAMENTO (SLIDER, VITRINE, CARRINHO)
+   SCRIPT.JS - VERSÃO COMPLETA E INTEGRADA
    ============================================================ */
 
 let currentSlide = 0;
 let slideInterval;
 
+// -- LÓGICA DO SLIDER (HOME) --
 function configurarSlider() {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -27,9 +28,7 @@ function configurarSlider() {
 
     function startAutoCycle() {
         clearInterval(slideInterval);
-        slideInterval = setInterval(() => {
-            updateSlider(currentSlide + 1);
-        }, 20000); // 20 Segundos
+        slideInterval = setInterval(() => { updateSlider(currentSlide + 1); }, 15000); 
     }
 
     if (btnNext) btnNext.onclick = () => { updateSlider(currentSlide + 1); startAutoCycle(); };
@@ -43,20 +42,37 @@ function configurarSlider() {
     startAutoCycle();
 }
 
-function inicializarPagina() {
-    atualizarContadorMenu();
-    if (document.querySelector('.hero-slider-section')) configurarSlider();
-    if (document.getElementById('detalhe-titulo')) carregarDadosDoProduto();
-    if (document.getElementById('lista-itens-carrinho')) renderizarCarrinho();
-    if (document.getElementById('vitrine-livros')) {
-        renderizarVitrine();
-        configurarPesquisa();
-    }
+// -- LÓGICA DO CARROSSEL DE RECOMENDAÇÕES (PRODUTO) --
+function scrollManual(direcao) {
+    const vitrine = document.getElementById('vitrine-recomendacoes');
+    if (!vitrine) return;
+    const scrollAmount = 200; 
+    vitrine.scrollBy({
+        left: direcao * scrollAmount,
+        behavior: 'smooth'
+    });
 }
 
+function renderizarRecomendacoes() {
+    const vitrine = document.getElementById('vitrine-recomendacoes');
+    if (!vitrine || typeof livros === 'undefined') return;
+
+    vitrine.innerHTML = livros.map(l => `
+        <article class="card-livro">
+            <a href="produto.html?id=${l.id}">
+                <img src="${l.imagem}" alt="${l.titulo}">
+                <h3>${l.titulo}</h3>
+                <p class="preco">R$ ${l.preco}</p>
+            </a>
+        </article>
+    `).join('');
+}
+
+// -- LÓGICA DA VITRINE PRINCIPAL --
 function renderizarVitrine(listaParaExibir = livros) {
     const vitrine = document.getElementById('vitrine-livros');
     if (!vitrine) return;
+    
     vitrine.innerHTML = listaParaExibir.map(l => `
         <article class="card-livro">
             <img src="${l.imagem}" alt="${l.titulo}">
@@ -72,44 +88,36 @@ function renderizarVitrine(listaParaExibir = livros) {
     `).join('');
 }
 
-function carregarDadosDoProduto() {
-    const params = new URLSearchParams(window.location.search);
-    const idUrl = params.get('id');
-    const livro = livros.find(l => Number(l.id) === Number(idUrl));
-
-    if (livro) {
-        document.getElementById('detalhe-titulo').innerText = livro.titulo;
-        document.getElementById('detalhe-autor').innerText = livro.autor;
-        document.getElementById('detalhe-preco').innerText = `R$ ${livro.preco}`;
-        document.getElementById('detalhe-sinopse').innerText = livro.sinopse;
-        document.getElementById('autor-nome-info').innerText = livro.autor;
-        document.getElementById('autor-bio').innerText = livro.bio;
-        const img = document.getElementById('detalhe-imagem');
-        if (img) img.src = livro.imagem;
-        const fotoAutor = document.getElementById('autor-foto');
-        if (fotoAutor) fotoAutor.src = livro.foto;
-
-        // --- MUDANÇA PARA O BOTÃO FUNCIONAR ---
-        const btnCompraGrande = document.querySelector('.btn-comprar-grande');
-        if (btnCompraGrande) {
-            btnCompraGrande.onclick = () => adicionarAoCarrinho(livro.id);
-        }
-    }
-}
-
+// -- LÓGICA DA BUSCA (ATUALIZADA: OCULTA O CONTAINER PRINCIPAL) --
 function configurarPesquisa() {
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const termo = e.target.value.toLowerCase();
-            const filtrados = livros.filter(l => 
-                l.titulo.toLowerCase().includes(termo) || l.autor.toLowerCase().includes(termo)
-            );
-            renderizarVitrine(filtrados);
-        });
-    }
+    const inputBusca = document.getElementById('search-input');
+    const conteudoPrincipal = document.getElementById('conteudo-principal'); 
+
+    if (!inputBusca) return;
+
+    inputBusca.addEventListener('input', (e) => {
+        const termo = e.target.value.toLowerCase();
+        
+        // Esconde o conteúdo principal ao pesquisar, mostra ao limpar
+        if (conteudoPrincipal) {
+            if (termo.length > 0) {
+                conteudoPrincipal.classList.add('modo-busca-ativo');
+            } else {
+                conteudoPrincipal.classList.remove('modo-busca-ativo');
+            }
+        }
+
+        if (typeof livros === 'undefined') return;
+        
+        const livrosFiltrados = livros.filter(livro => 
+            livro.titulo.toLowerCase().includes(termo) || 
+            (livro.autor && livro.autor.toLowerCase().includes(termo))
+        );
+        renderizarVitrine(livrosFiltrados);
+    });
 }
 
+// -- LÓGICA DO CARRINHO --
 function adicionarAoCarrinho(id) {
     const livro = livros.find(l => l.id === id);
     if (livro) {
@@ -119,6 +127,14 @@ function adicionarAoCarrinho(id) {
         atualizarContadorMenu();
         alert(`"${livro.titulo}" adicionado ao carrinho!`);
     }
+}
+
+function removerDoCarrinho(index) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.splice(index, 1);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    renderizarCarrinho();
+    atualizarContadorMenu();
 }
 
 function atualizarContadorMenu() {
@@ -131,14 +147,51 @@ function renderizarCarrinho() {
     const lista = document.getElementById('lista-itens-carrinho');
     const totalElemento = document.getElementById('preco-total-carrinho');
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    
     if (lista) {
-        lista.innerHTML = carrinho.length === 0 ? "<p>Carrinho vazio.</p>" : "";
+        if (carrinho.length === 0) {
+            lista.innerHTML = "<p style='padding:20px;'>Seu carrinho está vazio.</p>";
+            if (totalElemento) totalElemento.innerText = "R$ 0,00";
+            return;
+        }
+
+        lista.innerHTML = "";
         let soma = 0;
         carrinho.forEach((item, idx) => {
-            lista.innerHTML += `<div class="item-carrinho"><h4>${item.titulo}</h4><p>R$ ${item.preco}</p></div>`;
-            soma += parseFloat(item.preco.replace(',', '.'));
+            lista.innerHTML += `
+                <div class="cart-item-premium">
+                    <img src="${item.imagem}" alt="${item.titulo}" class="cart-img-premium">
+                    <div class="cart-info-premium">
+                        <h4>${item.titulo}</h4>
+                        <span class="cart-author">${item.autor}</span>
+                        <p class="cart-price">R$ ${item.preco}</p>
+                    </div>
+                    <button class="btn-remove-premium" onclick="removerDoCarrinho(${idx})">
+                        <i class="fas fa-trash-alt"></i> Remover
+                    </button>
+                </div>`;
+            soma += parseFloat(item.preco.toString().replace(',', '.'));
         });
         if (totalElemento) totalElemento.innerText = `R$ ${soma.toFixed(2).replace('.', ',')}`;
+    }
+}
+
+// -- INICIALIZAÇÃO GERAL --
+function inicializarPagina() {
+    atualizarContadorMenu();
+    
+    if (document.querySelector('.hero-slider-section')) configurarSlider();
+    // Certifique-se de que carregarDadosDoProduto esteja definida no seu código
+    if (document.getElementById('detalhe-titulo') && typeof carregarDadosDoProduto === 'function') carregarDadosDoProduto(); 
+    if (document.getElementById('lista-itens-carrinho')) renderizarCarrinho();
+    
+    if (document.getElementById('vitrine-livros')) {
+        renderizarVitrine();
+        configurarPesquisa(); 
+    }
+    
+    if (document.getElementById('vitrine-recomendacoes')) {
+        renderizarRecomendacoes();
     }
 }
 
